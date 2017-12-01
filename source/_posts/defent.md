@@ -18,7 +18,7 @@ tags:
 http://localhost/list.php?action=delete&id=12
 ```
 
-当恶意用户想管理员发送包含CSFR的邮件，骗取管理员访问http://test.com/csrf.php,在这个恶意网页中只要包含这样的html语句就可以利用让管理员在不知
+当恶意用户想管理员发送包含CSFR的邮件，骗取管理员访问 http://test.com/csrf.php 在这个恶意网页中只要包含这样的html语句就可以利用让管理员在不知
 情的情况下删除帖子了
 ```
 <img alt="" src="http://localhost/list.php?action=delete&id=12"/>
