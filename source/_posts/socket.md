@@ -13,7 +13,9 @@ tags:
 
 ## 子线程
 
-1. 死循环接收消息
+### 死循环接收消息
+
+## 服务端代码如下:
 
 ```
 /**
@@ -193,6 +195,8 @@ public class ChatServer implements ActionListener, Runnable {
 ## 子线程
 
 ### 死循环接收消息
+
+### 客户端代码如下：
 ```
 /**
  * 
