@@ -20,7 +20,7 @@ DATE="mysql-`date +'%Y%m%d-%H:%M:%S'`"
 LogFile="$BACK_DIR"/dbbakup.log #日志记录保存的目录
 BackNewFile=$DATE.sql
 
-$BIN_DIR/mysqldump -u$DB_USER -pDB_PASSWORD $DB_NAME > $BACK_DIR/$DATE.sql
+$BIN_DIR/mysqldump -u$DB_USER -p$DB_PASSWORD $DB_NAME > $BACK_DIR/$DATE.sql
 
 
 echo -----------------"$(date +"%y-%m-%d %H:%M:%S")"------------------ >> $LogFile
