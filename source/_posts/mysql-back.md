@@ -17,23 +17,19 @@ DB_PASSWORD="abc123"
 BIN_DIR="/usr/bin"
 BACK_DIR="/root/data"
 DATE="mysql-`date +'%Y%m%d-%H:%M:%S'`"
-LogFile="$BACK_DIR"/dbbakup.log #日志记录保存的目录
+LogFile="$BACK_DIR"/dbbakup.log
 BackNewFile=$DATE.sql
 
 $BIN_DIR/mysqldump -u$DB_USER -p$DB_PASSWORD $DB_NAME > $BACK_DIR/$DATE.sql
-
 
 echo -----------------"$(date +"%y-%m-%d %H:%M:%S")"------------------ >> $LogFile
 
 echo  createFile:"$BackNewFile" >> $LogFile
 
-#find "/data/backdata/" -cmin +1 -type f -name "*.sql" -print > deleted.txt
-#-ctime表示创建时间，这里表示删除创建时间为多少天之前的文件，也就是结果只保留多少天的数据
 find "/root/data/" -ctime +0 -type f -name "*.sql" -print > deleted.txt
 
 echo -e "delete files:\n" >> $LogFile
 
-#循环删除匹配到的文件
 cat deleted.txt | while read LINE
 do
     rm -rf $LINE
