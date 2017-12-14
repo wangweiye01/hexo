@@ -13,13 +13,14 @@ tags:
 # /bin/bash
 DB_NAME="exchange"
 DB_USER="root"
+DB_PASSWORD="abc123"
 BIN_DIR="/usr/bin"
 BACK_DIR="/root/data"
 DATE="mysql-`date +'%Y%m%d-%H:%M:%S'`"
 LogFile="$BACK_DIR"/dbbakup.log #日志记录保存的目录
 BackNewFile=$DATE.sql
 
-$BIN_DIR/mysqldump -u$DB_USER -p $DB_NAME > $BACK_DIR/$DATE.sql
+$BIN_DIR/mysqldump -u$DB_USER -pDB_PASSWORD $DB_NAME > $BACK_DIR/$DATE.sql
 
 
 echo -----------------"$(date +"%y-%m-%d %H:%M:%S")"------------------ >> $LogFile
@@ -45,3 +46,7 @@ echo "---------------------------------------------------------------" >> $LogFi
 # 利用cron定时执行
 
 利用cron服务定时执行数据备份脚本。该脚本会自动删除过期的sql文件
+例如 每天12:50定时执行mysqlback.sh脚本：
+```
+50 12 * * * /root/mysqlback.sh
+```
