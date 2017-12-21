@@ -7,7 +7,7 @@ mysql5.7设置允许外网登录数据库
 
 # 创建host
 
-## 进入mysql数据库，修改`user`表
+## 进入mysql数据库，修改user表
 
 ```
 use mysql
@@ -43,5 +43,5 @@ flush privileges
 
 # 可能遇到的问题
 
-## 设置后仍不能访问：防火墙放开mysql的tcp端口
-## 如果是阿里ECS用户：配置安全组规则放开mysql端口
+- 设置后仍不能访问：防火墙放开mysql的tcp端口
+- 如果是阿里ECS用户：配置安全组规则放开mysql端口
