@@ -3,6 +3,7 @@ title: mysql设置外部访问
 date: 2017-12-21 16:45:54
 tags:
 ---
+![pic](http://s1.wailian.download/2018/01/18/3ce570ed091e852cd203a1e621362585d16831a072ccc-m7zSKp_fw658.jpg)
 mysql5.7设置允许外网登录数据库
 
 # 创建host

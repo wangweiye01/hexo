@@ -3,6 +3,7 @@ title: 避免ssh超时断开
 date: 2017-12-20 09:24:21
 tags:
 ---
+![pic](http://s1.wailian.download/2018/01/18/714c395dedd696f341be46b38326674137170a2a1cb62-mzzZiS_fw658.jpg)
 用ssh连接服务器经常遇到长时间不操作而被服务器踢出的情况，提示如下
 > Write failed: Broken pipe
 

@@ -3,6 +3,7 @@ title: vps搭建shadowsocks
 date: 2017-11-28 10:18:55
 tags:
 ---
+![pic](http://s1.wailian.download/2018/01/18/3bf44e943f8d77713982edd8c8e0fa478c6bbf622633d-zCwRVd_fw658.jpg)
 # 购买vultr服务
 
 注册vultr,购买服务(建议地址选Tokyo,操作系统选择CentOS,配置选择最小配置),然后部署服务器
