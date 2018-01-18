@@ -1,6 +1,7 @@
 ---
 title: Hello World
 ---
+![](http://s1.wailian.download/2018/01/18/e5e54a1fbe5214e3d7bfab130ad1aaf4461ee1e311b625-SbVFu6_fw658.jpg)
 Welcome to [Hexo](https://hexo.io/)! This is your very first post. Check [documentation](https://hexo.io/docs/) for more info. If you get any problems when using Hexo, you can find the answer in [troubleshooting](https://hexo.io/docs/troubleshooting.html) or you can ask me on [GitHub](https://github.com/hexojs/hexo/issues).
 
 ## Quick Start
