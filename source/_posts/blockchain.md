@@ -3,8 +3,7 @@ title: 区块链的理解
 date: 2018-01-19 09:49:44
 tags:
 ---
-![pic](http://s1.wailian.download/2018/01/19/46b284d39aba76d388d0092b3e73599920b7afff38766-WU9ZAF_fw658.jpg)
-
+![pic](http://s1.wailian.download/2018/01/19/f7a1eb169a2ac8556d241cd7173ca9a5d9ede3cb161fa5-eeMK3M_fw658.jpg)
 > 最近在各个媒体中出现了区块链的概念，抽时间了解了一下
 
 # 区块链的本质
