@@ -3,6 +3,7 @@ title: Java多线程编程
 date: 2018-01-23 14:35:57
 tags:
 ---
+![pic](http://www.wailian.work/images/2018/01/23/60f198516cee4ab511cb190a85599d3e1d88302a4d1ba-iBehXn_fw658.jpg)
 
 # 相关概念
 
