@@ -72,12 +72,14 @@ start slave;
 
 主库创建一个库，一个表，观察从库是否同样创建
 
+## 设置主从库之后MySq会持续产生日志，需要定期清除或则设置自动清除
+
 # 附录：
 
-到这里，全部库的主从配置就完成了，实际应用中可能会用到单个表的同步，或者部分表的同步，只需要在主库的/etc/my.cnf里加上
+到这里，全部库的主从配置就完成了，实际应用中可能会用到单个表的同步，或者部分表的同步，只需要在从库的/etc/my.cnf里加上
 
-只复制某个表replicate-do-table=tablename
-只复制某些表（可用匹配符）replicate-wild-do-table=tablename%
+只复制某个表replicate-do-table=dbname.tablename
+只复制某些表（可用匹配符）replicate-wild-do-table=dbname.tablename%
 只复制某个库replicate-do-db=dbname
 只复制某些库replicte-wild-do-db=dbname%
-不复制某个表replicate-ignore-table=tablename
+不复制某个表replicate-ignore-table=dbname.tablename
