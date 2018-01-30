@@ -3,7 +3,7 @@ title: twitter的雪花算法实现
 date: 2018-01-30 08:38:03
 tags:
 ---
-![](http://www.wailian.work/images/2018/01/30/03db0bca04fe8427f5ed72e034d4b2221d1badaff2aca-X1jrjb_fw658.jpg)
+![](http://www.wailian.work/images/2018/01/30/f0cada473c10b0fcfae9784875af64050052c1d2195d47-eEEC79_fw658.jpg)
 
 # 概述
 
