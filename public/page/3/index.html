@@ -1,0 +1,1793 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/blog/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/blog/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/blog/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/blog/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Hexo, NexT" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="后端 服务器 Java">
+<meta property="og:type" content="website">
+<meta property="og:title" content="老枪的世界">
+<meta property="og:url" content="https://wangweiye01.github.io/blog/page/3/index.html">
+<meta property="og:site_name" content="老枪的世界">
+<meta property="og:description" content="后端 服务器 Java">
+<meta property="og:locale" content="zh-Hans">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="老枪的世界">
+<meta name="twitter:description" content="后端 服务器 Java">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/blog/',
+    scheme: 'Pisces',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://wangweiye01.github.io/blog/page/3/"/>
+
+
+
+
+
+  <title>老枪的世界</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?de937bbd89c60c5077073fb5db3a9f47";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left 
+  page-home">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/blog/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">老枪的世界</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">你不懂</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/blog/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/blog/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+  <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/12/07/mac-git/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/12/07/mac-git/" itemprop="url">mac系统更新后git不可用</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-07T11:40:04+08:00">
+                2017-12-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>更新了系统后，使用git命令，提示错误如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcrun: error: invalid active developer path (/Library/Developer/CommandLineTools), missing xcrun at: /Library/Developer/CommandLineTools/usr/bin/xcrun</span><br></pre></td></tr></table></figure></p>
+<h2 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h2><p>因为每次更新系统之后xcode就被卸载了，因此需要重新安装一次</p>
+<h2 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h2><p>终端执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xcode-select --install</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/12/05/round/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/12/05/round/" itemprop="url">mysql计算两个坐标的距离</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-05T18:04:35+08:00">
+                2017-12-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">round(6378.138*2*asin(sqrt(pow(sin( (lat1*pi()/180-lat2*pi()/180)/2),2)+cos(lat1*pi()/180)*cos(lat2*pi()/180)* pow(sin( (lng1*pi()/180-lng2*pi()/180)/2),2)))*1000)</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/12/04/sequence/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/12/04/sequence/" itemprop="url">mysql自定义sequence</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-04T15:02:51+08:00">
+                2017-12-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="什么是sequence"><a href="#什么是sequence" class="headerlink" title="什么是sequence"></a>什么是sequence</h1><p>序列，在Oracle数据库中，什么是序列呢？它的用途是什么？序列(SEQUENCE)其实是序列号生成器，可以为表中的行自动生成序列号，产生一组等间隔的数值(类型为数字)。其主要的用途是生成表的主键值，可以在插入语句中引用，也可以通过查询检查当前值，或使序列增至下一个值。</p>
+<h1 id="mysql没有内置sequence，需要自己实现"><a href="#mysql没有内置sequence，需要自己实现" class="headerlink" title="mysql没有内置sequence，需要自己实现"></a>mysql没有内置sequence，需要自己实现</h1><h2 id="创建sequence表"><a href="#创建sequence表" class="headerlink" title="创建sequence表"></a>创建sequence表</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">CREATE TABLE sequence (</span><br><span class="line">        name VARCHAR(50) NOT NULL,</span><br><span class="line">        current_value INT NOT NULL,</span><br><span class="line">        increment INT NOT NULL DEFAULT 1,</span><br><span class="line">        PRIMARY KEY (name)</span><br><span class="line">        )</span><br></pre></td></tr></table></figure>
+<h2 id="获取当前序列值"><a href="#获取当前序列值" class="headerlink" title="获取当前序列值"></a>获取当前序列值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION currval (seq_name VARCHAR(50))</span><br><span class="line">    RETURNS INTEGER</span><br><span class="line">    LANGUAGE SQL</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    CONTAINS SQL</span><br><span class="line">    SQL SECURITY DEFINER</span><br><span class="line">    COMMENT &apos;&apos;</span><br><span class="line">    BEGIN</span><br><span class="line">    DECLARE value INTEGER;</span><br><span class="line">    SET value = 0;</span><br><span class="line">    SELECT current_value INTO value</span><br><span class="line">    FROM sequence</span><br><span class="line">    WHERE name = seq_name;</span><br><span class="line">    RETURN value;</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
+<h2 id="获取下一个序列"><a href="#获取下一个序列" class="headerlink" title="获取下一个序列"></a>获取下一个序列</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION nextval (seq_name VARCHAR(50))</span><br><span class="line">    RETURNS INTEGER</span><br><span class="line">    LANGUAGE SQL</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    CONTAINS SQL</span><br><span class="line">    SQL SECURITY DEFINER</span><br><span class="line">    COMMENT &apos;&apos;</span><br><span class="line">    BEGIN</span><br><span class="line">    UPDATE sequence</span><br><span class="line">    SET current_value = current_value + increment</span><br><span class="line">    WHERE name = seq_name;</span><br><span class="line">    RETURN currval(seq_name);</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
+<h2 id="重置序列值"><a href="#重置序列值" class="headerlink" title="重置序列值"></a>重置序列值</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">CREATE FUNCTION setval (seq_name VARCHAR(50), value INTEGER)</span><br><span class="line">    RETURNS INTEGER</span><br><span class="line">    LANGUAGE SQL</span><br><span class="line">    DETERMINISTIC</span><br><span class="line">    CONTAINS SQL</span><br><span class="line">    SQL SECURITY DEFINER</span><br><span class="line">    COMMENT &apos;&apos;</span><br><span class="line">    BEGIN</span><br><span class="line">    UPDATE sequence</span><br><span class="line">    SET current_value = value</span><br><span class="line">    WHERE name = seq_name;</span><br><span class="line">    RETURN currval(seq_name);</span><br><span class="line">    END</span><br></pre></td></tr></table></figure>
+<h2 id="应用"><a href="#应用" class="headerlink" title="应用"></a>应用</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">// 在序列表中新建一条序列（参数依次为：序列名称、序列开始值、序列递增步长）</span><br><span class="line">INSERT INTO sequence VALUES (&apos;TestSeq&apos;, 0, 1);</span><br><span class="line">// 设置序列开始值（参数依次为：序列名称、序列开始值）</span><br><span class="line">SELECT SETVAL(&apos;TestSeq&apos;, 10);</span><br><span class="line">SELECT CURRVAL(&apos;TestSeq&apos;);</span><br><span class="line">// 获得下一个序列值</span><br><span class="line">SELECT NEXTVAL(&apos;TestSeq&apos;);</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/12/03/socket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/12/03/socket/" itemprop="url">socket实现服务端客户端通讯</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-03T13:00:29+08:00">
+                2017-12-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="server服务端"><a href="#server服务端" class="headerlink" title="server服务端"></a>server服务端</h1><h2 id="主线程"><a href="#主线程" class="headerlink" title="主线程"></a>主线程</h2><h3 id="构建页面"><a href="#构建页面" class="headerlink" title="构建页面"></a>构建页面</h3><h3 id="创建serverSocket"><a href="#创建serverSocket" class="headerlink" title="创建serverSocket"></a>创建serverSocket</h3><h3 id="添加send按钮的点击事件"><a href="#添加send按钮的点击事件" class="headerlink" title="添加send按钮的点击事件"></a>添加send按钮的点击事件</h3><h2 id="子线程"><a href="#子线程" class="headerlink" title="子线程"></a>子线程</h2><h3 id="死循环接收消息"><a href="#死循环接收消息" class="headerlink" title="死循环接收消息"></a>死循环接收消息</h3><h2 id="服务端代码如下"><a href="#服务端代码如下" class="headerlink" title="服务端代码如下:"></a>服务端代码如下:</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * 主线程发送消息</span><br><span class="line"> * 子线程接收消息</span><br><span class="line"> */</span><br><span class="line">package com.yatai.web;</span><br><span class="line"></span><br><span class="line">import java.awt.BorderLayout;</span><br><span class="line">import java.awt.Container;</span><br><span class="line">import java.awt.FlowLayout;</span><br><span class="line">import java.awt.event.ActionEvent;</span><br><span class="line">import java.awt.event.ActionListener;</span><br><span class="line">import java.io.DataInputStream;</span><br><span class="line">import java.io.DataOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.ServerSocket;</span><br><span class="line">import java.net.Socket;</span><br><span class="line">import java.util.ArrayList;</span><br><span class="line"></span><br><span class="line">import javax.swing.JButton;</span><br><span class="line">import javax.swing.JFrame;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line">import javax.swing.JScrollPane;</span><br><span class="line">import javax.swing.JTextArea;</span><br><span class="line">import javax.swing.JTextField;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author 王伟业 2014年5月28日</span><br><span class="line"> */</span><br><span class="line">public class ChatServer implements ActionListener, Runnable &#123;</span><br><span class="line">    // 用来存放客户端连接数量</span><br><span class="line">    public static ArrayList&lt;Socket&gt; socketList = new ArrayList&lt;Socket&gt;();</span><br><span class="line">    // 显示历史聊天记录</span><br><span class="line">    private JTextArea showArea;</span><br><span class="line">    // 待发送的字符区域</span><br><span class="line">    private JTextField msgText;</span><br><span class="line">    // 窗口</span><br><span class="line">    private JFrame mainJframe;</span><br><span class="line">    // 发送按钮</span><br><span class="line">    private JButton sentBtn;</span><br><span class="line">    // 滚动面板</span><br><span class="line">    private JScrollPane JSPane;</span><br><span class="line">    // 普通面板</span><br><span class="line">    private JPanel pane;</span><br><span class="line">    // 最大的容器</span><br><span class="line">    private Container con;</span><br><span class="line">    // 线程处理信息</span><br><span class="line">    private Thread thread = null;</span><br><span class="line">    private ServerSocket serverSocket;</span><br><span class="line">    private Socket connectToClient;</span><br><span class="line">    private DataInputStream inFromClient;</span><br><span class="line">    private DataOutputStream outToClient;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * 构造函数用来设置界面，处理事件</span><br><span class="line">     */</span><br><span class="line">    public ChatServer() &#123;</span><br><span class="line">        // TODO Auto-generated constructor stub</span><br><span class="line">        // 设置页面</span><br><span class="line">        mainJframe = new JFrame(&quot;服务器端&quot;);</span><br><span class="line">        // 初始化容器</span><br><span class="line">        con = mainJframe.getContentPane();</span><br><span class="line">        showArea = new JTextArea();</span><br><span class="line">        showArea.setEditable(false); // 历史聊天窗口中的文字域不能编辑，只供查看</span><br><span class="line">        showArea.setLineWrap(true); // 自动换行</span><br><span class="line">        JSPane = new JScrollPane(showArea);</span><br><span class="line">        // 待发送文字区域</span><br><span class="line">        msgText = new JTextField();</span><br><span class="line">        msgText.setColumns(35);</span><br><span class="line">        // 事件监听</span><br><span class="line">        msgText.addActionListener(this);</span><br><span class="line">        sentBtn = new JButton(&quot;Send&quot;);</span><br><span class="line">        sentBtn.addActionListener(this);</span><br><span class="line">        // 界面下部</span><br><span class="line">        pane = new JPanel();</span><br><span class="line">        pane.setLayout(new FlowLayout());</span><br><span class="line">        pane.add(msgText);</span><br><span class="line">        pane.add(sentBtn);</span><br><span class="line"></span><br><span class="line">        con.add(JSPane, BorderLayout.CENTER);</span><br><span class="line">        con.add(pane, BorderLayout.SOUTH);</span><br><span class="line">        mainJframe.setSize(500, 400);</span><br><span class="line">        mainJframe.setLocation(600, 200);</span><br><span class="line">        mainJframe.setVisible(true);</span><br><span class="line">        mainJframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            serverSocket = new ServerSocket(8888);</span><br><span class="line">            showArea.append(&quot;  正在等待对话请求\n&quot;);</span><br><span class="line">            // 监听端口</span><br><span class="line">            connectToClient = serverSocket.accept();</span><br><span class="line">            inFromClient = new DataInputStream(connectToClient.getInputStream());</span><br><span class="line">            outToClient = new DataOutputStream(connectToClient.getOutputStream());</span><br><span class="line">            // 启动线程</span><br><span class="line">            thread = new Thread(this);</span><br><span class="line">            thread.setPriority(Thread.MIN_PRIORITY);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            // TODO Auto-generated catch block</span><br><span class="line">            // 出现此异常说明服务器未创建成功</span><br><span class="line">            showArea.append(&quot;  对不起，不能创建服务器\n&quot;);</span><br><span class="line">            // 待发送文字区域不能编辑</span><br><span class="line">            msgText.setEditable(false);</span><br><span class="line">            // 发送按钮不可用</span><br><span class="line">            sentBtn.setEnabled(false);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * (non-Javadoc)</span><br><span class="line">     * </span><br><span class="line">     * @see java.lang.Runnable#run()</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            // TODO Auto-generated method stub</span><br><span class="line">            // 此线程用来接收客户端传来的信息</span><br><span class="line">            while (true) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    showArea.append(&quot;  对方说：&quot; + inFromClient.readUTF() + &quot;\n&quot;);</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (IOException | InterruptedException e) &#123;</span><br><span class="line">                    // TODO Auto-generated catch block</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * (non-Javadoc)</span><br><span class="line">     * </span><br><span class="line">     * @see</span><br><span class="line">     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">        public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">            // TODO Auto-generated method stub</span><br><span class="line">            // 响应按钮事件</span><br><span class="line">            String s = msgText.getText();</span><br><span class="line">            // 如果待发送文字区域存在文字</span><br><span class="line">            if (s.length() &gt; 0) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    // 将文字写入到流中</span><br><span class="line">                    outToClient.writeUTF(s);</span><br><span class="line">                    outToClient.flush();</span><br><span class="line">                    // 历史聊天记录增添内容</span><br><span class="line">                    showArea.append(&quot;  我说：&quot; + msgText.getText() + &quot;\n&quot;);</span><br><span class="line">                    // 待发送文字区域设为空</span><br><span class="line">                    msgText.setText(null);</span><br><span class="line">                &#125; catch (IOException e1) &#123;</span><br><span class="line">                    // TODO Auto-generated catch block</span><br><span class="line">                    // 出现此异常说明消息未发送成功</span><br><span class="line">                    showArea.append(&quot;  你的消息：&quot; + &quot;“&quot; + msgText.getText() + &quot;”&quot; + &quot;未能发送成功\n&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        // 主线程用来发送消息</span><br><span class="line">        new ChatServer();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="client客户端"><a href="#client客户端" class="headerlink" title="client客户端"></a>client客户端</h1><h2 id="主线程-1"><a href="#主线程-1" class="headerlink" title="主线程"></a>主线程</h2><h3 id="构建页面-1"><a href="#构建页面-1" class="headerlink" title="构建页面"></a>构建页面</h3><h3 id="连接serverSocket"><a href="#连接serverSocket" class="headerlink" title="连接serverSocket"></a>连接serverSocket</h3><h3 id="添加send按钮的监听事件"><a href="#添加send按钮的监听事件" class="headerlink" title="添加send按钮的监听事件"></a>添加send按钮的监听事件</h3><h2 id="子线程-1"><a href="#子线程-1" class="headerlink" title="子线程"></a>子线程</h2><h3 id="死循环接收消息-1"><a href="#死循环接收消息-1" class="headerlink" title="死循环接收消息"></a>死循环接收消息</h3><h3 id="客户端代码如下："><a href="#客户端代码如下：" class="headerlink" title="客户端代码如下："></a>客户端代码如下：</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line"> * </span><br><span class="line"> */</span><br><span class="line">package com.yatai.web;</span><br><span class="line"></span><br><span class="line">import java.awt.BorderLayout;</span><br><span class="line">import java.awt.Container;</span><br><span class="line">import java.awt.FlowLayout;</span><br><span class="line">import java.awt.event.ActionEvent;</span><br><span class="line">import java.awt.event.ActionListener;</span><br><span class="line">import java.io.DataInputStream;</span><br><span class="line">import java.io.DataOutputStream;</span><br><span class="line">import java.io.IOException;</span><br><span class="line">import java.net.Socket;</span><br><span class="line"></span><br><span class="line">import javax.swing.JButton;</span><br><span class="line">import javax.swing.JFrame;</span><br><span class="line">import javax.swing.JPanel;</span><br><span class="line">import javax.swing.JScrollPane;</span><br><span class="line">import javax.swing.JTextArea;</span><br><span class="line">import javax.swing.JTextField;</span><br><span class="line"></span><br><span class="line">/**</span><br><span class="line"> * @author 王伟业 2014年5月28日</span><br><span class="line"> */</span><br><span class="line">public class ChatClient implements ActionListener, Runnable &#123;</span><br><span class="line">    // 相同的界面形式</span><br><span class="line">    private JTextArea showArea;</span><br><span class="line">    private JTextField msgText;</span><br><span class="line">    private JFrame mainJframe;</span><br><span class="line">    private JButton sentBtn;</span><br><span class="line">    private JScrollPane JSPane;</span><br><span class="line">    private JPanel pane;</span><br><span class="line">    private Container con;</span><br><span class="line">    // 相似的处理方法</span><br><span class="line">    private Thread thread = null;</span><br><span class="line">    private Socket connectToServer;</span><br><span class="line">    private DataInputStream inFromServer;</span><br><span class="line">    private DataOutputStream outToServer;</span><br><span class="line"></span><br><span class="line">    /**</span><br><span class="line">     * </span><br><span class="line">     */</span><br><span class="line">    public ChatClient() &#123;</span><br><span class="line">        // TODO Auto-generated constructor stub</span><br><span class="line">        // 构造函数下完成以下内容</span><br><span class="line">        mainJframe = new JFrame(&quot;客户端&quot;);</span><br><span class="line">        con = mainJframe.getContentPane();</span><br><span class="line">        showArea = new JTextArea();</span><br><span class="line">        showArea.setEditable(false);</span><br><span class="line">        showArea.setLineWrap(true);</span><br><span class="line">        showArea.setWrapStyleWord(true);</span><br><span class="line">        JSPane = new JScrollPane(showArea);</span><br><span class="line">        msgText = new JTextField();</span><br><span class="line">        msgText.setColumns(35);</span><br><span class="line">        msgText.addActionListener(this);</span><br><span class="line">        sentBtn = new JButton(&quot;Send&quot;);</span><br><span class="line">        sentBtn.addActionListener(this);</span><br><span class="line">        pane = new JPanel();</span><br><span class="line">        pane.setLayout(new FlowLayout());</span><br><span class="line">        pane.add(msgText);</span><br><span class="line">        pane.add(sentBtn);</span><br><span class="line">        con.add(JSPane, BorderLayout.CENTER);</span><br><span class="line">        con.add(pane, BorderLayout.SOUTH);</span><br><span class="line">        mainJframe.setSize(500, 400);</span><br><span class="line">        mainJframe.setLocation(80, 200);</span><br><span class="line">        mainJframe.setVisible(true);</span><br><span class="line">        mainJframe.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);</span><br><span class="line"></span><br><span class="line">        try &#123;</span><br><span class="line">            connectToServer = new Socket(&quot;localhost&quot;, 8888);</span><br><span class="line">            inFromServer = new DataInputStream(connectToServer.getInputStream());</span><br><span class="line">            outToServer = new DataOutputStream(connectToServer.getOutputStream());</span><br><span class="line">            showArea.append(&quot;  连接成功，可以通信\n&quot;);</span><br><span class="line"></span><br><span class="line">            // 创建线程</span><br><span class="line">            thread = new Thread(this);</span><br><span class="line">            thread.setPriority(Thread.MIN_PRIORITY);</span><br><span class="line">            thread.start();</span><br><span class="line">        &#125; catch (IOException e) &#123;</span><br><span class="line">            // TODO Auto-generated catch block</span><br><span class="line">            // 出现异常说明连接失败</span><br><span class="line">            // 向历史聊天区域打印提示信息</span><br><span class="line">            showArea.append(&quot;  对不起，连接服务器失败\n&quot;);</span><br><span class="line">            // 异常连接时输入框不可用</span><br><span class="line">            msgText.setEditable(false);</span><br><span class="line">            msgText.setEnabled(false);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * (non-Javadoc)</span><br><span class="line">     * </span><br><span class="line">     * @see java.lang.Runnable#run()</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">        public void run() &#123;</span><br><span class="line">            // TODO Auto-generated method stub</span><br><span class="line">            // 该线程用来接收传来的消息</span><br><span class="line">            while (true) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    showArea.append(&quot;  对方说：&quot; + inFromServer.readUTF() + &quot;\n&quot;);</span><br><span class="line">                    Thread.sleep(1000);</span><br><span class="line">                &#125; catch (IOException | InterruptedException e) &#123;</span><br><span class="line">                    // TODO Auto-generated catch block</span><br><span class="line">                    // 此处异常处理。。。。</span><br><span class="line">                    e.printStackTrace();</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    /*</span><br><span class="line">     * (non-Javadoc)</span><br><span class="line">     * </span><br><span class="line">     * @see</span><br><span class="line">     * java.awt.event.ActionListener#actionPerformed(java.awt.event.ActionEvent)</span><br><span class="line">     */</span><br><span class="line">    @Override</span><br><span class="line">        public void actionPerformed(ActionEvent e) &#123;</span><br><span class="line">            // TODO Auto-generated method stub</span><br><span class="line">            // 响应事件</span><br><span class="line">            String s = msgText.getText();</span><br><span class="line">            // 如果待发送文字区域存在文字</span><br><span class="line">            if (s.length() &gt; 0) &#123;</span><br><span class="line">                try &#123;</span><br><span class="line">                    // 将文字写入到流中</span><br><span class="line">                    outToServer.writeUTF(s);</span><br><span class="line">                    outToServer.flush();</span><br><span class="line">                    // 历史聊天记录增添内容</span><br><span class="line">                    showArea.append(&quot;  我说：&quot; + msgText.getText() + &quot;\n&quot;);</span><br><span class="line">                    // 待发送文字区域设为空</span><br><span class="line">                    msgText.setText(null);</span><br><span class="line">                &#125; catch (IOException e1) &#123;</span><br><span class="line">                    // TODO Auto-generated catch block</span><br><span class="line">                    // 出现此异常说明消息未发送成功</span><br><span class="line">                    showArea.append(&quot;  你的消息：&quot; + &quot;“&quot; + msgText.getText() + &quot;”&quot; + &quot;未能发送成功\n&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new ChatClient();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/12/01/spring-boot-active/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/12/01/spring-boot-active/" itemprop="url">Spring Boot多环境配置</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-12-01T08:49:43+08:00">
+                2017-12-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p><img src="http://s1.wailian.download/2018/01/18/30861ad3a953b85edb424fe6dcf4e3198bdeaf28884b8-7xLVBN_fw658.jpg" alt=""><br>我们在开发Spring Boot应用时，通常同一套程序会被应用和安装到几个不同的环境，比如：开发、测试、生产等。其中每个环境的数据库地址、服务器端口等等配置都会不同，如果在为不同环境打包时都要频繁修改配置文件的话，那必将是个非常繁琐且容易发生错误的事。</p>
+<p>对于多环境的配置，各种项目构建工具或是框架的基本思路是一致的，通过配置多份不同环境的配置文件，再通过打包命令指定需要打包的内容之后进行区分打包，Spring Boot也不例外，或者说更加简单。</p>
+<p>在Spring Boot中多环境配置文件名需要满足 <code>application-{profile}.properties</code>的格式，其中<code>{profile}</code>对应你的环境标识，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">application-dev.properties：开发环境 </span><br><span class="line">application-test.properties：测试环境 </span><br><span class="line">application-prod.properties：生产环境</span><br></pre></td></tr></table></figure>
+<p>至于哪个具体的配置文件会被加载，需要在<code>application.properties</code>文件中通过<code>spring.profiles.active</code>属性来设置，其值对应<code>{profile}</code>值。</p>
+<p>如：<code>spring.profiles.active=test</code>就会加载<code>application-test.properties</code>配置文件内容</p>
+<p>下面，以不同环境配置不同的服务端口为例，进行样例实验。</p>
+<p>针对各环境新建不同的配置文件<code>application-dev.properties</code>、<code>application-test.properties</code>、<code>application-prod.properties</code></p>
+<p>测试不同配置的加载:<br>执行<code>java -jar xxx.jar --spring.profiles.active=prod</code>也就是生产环境的配置<code>(prod)</code>按照上面的实验，可以如下总结多环境的配置思路：</p>
+<p><strong><code>application.properties</code>中配置通用内容，并设置<code>spring.profiles.active=dev</code>，以开发环境为默认配置</strong><br><strong><code>application-{profile}.properties</code>中配置各个环境不同的内容</strong><br><strong>通过命令行方式去激活不同环境的配置</strong></p>
+<p>转载自<a href="http://blog.didispace.com/springbootproperties/" target="_blank" rel="noopener">程序猿DD-翟永超</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/30/cache-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/30/cache-db/" itemprop="url">如何保持数据库和缓存的一致性</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T22:45:06+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="更新缓存策略"><a href="#更新缓存策略" class="headerlink" title="更新缓存策略"></a>更新缓存策略</h1><ul>
+<li>失效：应用程序从cache取数据，没有得到，则从数据库取数据，然后将数据放入cache </li>
+<li>命中：应用从cache取数据，若取到则返回 </li>
+<li>更新：把数据更新到数据库，然后使cache失效</li>
+</ul>
+<p>借用网上两张图<br><img src="http://img.blog.csdn.net/20170726111231331?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20170726111304065?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h1 id="有没有其他策略"><a href="#有没有其他策略" class="headerlink" title="有没有其他策略?"></a>有没有其他策略?</h1><p>读操作容易理解，现在讨论一下写的操作</p>
+<h2 id="如果先使cache失效，后更新数据库，是否可行"><a href="#如果先使cache失效，后更新数据库，是否可行" class="headerlink" title="如果先使cache失效，后更新数据库，是否可行"></a>如果先使cache失效，后更新数据库，是否可行</h2><p>这么做引发的问题是，如果A,B两个线程同时要更新数据，并且A,B已经都做完了删除缓存这一步，接下来，A先更新了数据库，C线程读取数据，由于缓存没有，则查数据库，并把A更新的数据，写入了缓存，最后B更新数据库。那么缓存和数据库的值就不一致了。</p>
+<h2 id="如果先把数据库更新，然后把cache更新（不是失效），是否可行"><a href="#如果先把数据库更新，然后把cache更新（不是失效），是否可行" class="headerlink" title="如果先把数据库更新，然后把cache更新（不是失效），是否可行"></a>如果先把数据库更新，然后把cache更新（不是失效），是否可行</h2><p>这么做引发的问题是，如果A,B两个线程同时做数据更新，A先更新了数据库，B后更新数据库，则此时数据库里存的是B的数据。而更新缓存的时候，是B先更新了缓存，而A后更新了缓存，则缓存里是A的数据。这样缓存和数据库的数据也不一致。</p>
+<h2 id="如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？"><a href="#如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？" class="headerlink" title="如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？"></a>如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？</h2><ul>
+<li>对删除缓存进行重试，数据的一致性要求越高，我越是重试得快。 </li>
+<li>定期全量更新，简单地说，就是我定期把缓存全部清掉，然后再全量加载。 </li>
+<li>给所有的缓存一个失效期。（绝招，任何不一致，都可以靠失效期解决，失效期越短，数据一致性越高。但是失效期越短，查数据库就会越频繁。因此失效期应该根据业务来定）</li>
+</ul>
+<p><strong>不要缓存那些对数据一致性要求很高的数据</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/29/activemq/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/29/activemq/" itemprop="url">Spring Boot整合activemq</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T12:34:03+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="activemq安装"><a href="#activemq安装" class="headerlink" title="activemq安装"></a>activemq安装</h1><h2 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h2><p><a href="http://activemq.apache.org/" target="_blank" rel="noopener">点击下载</a></p>
+<h2 id="解压启动"><a href="#解压启动" class="headerlink" title="解压启动"></a>解压启动</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tar -zxvf apache-activemq-5.14.0-bin.tar.gz</span><br></pre></td></tr></table></figure>
+<p>进去bin目录 cd apache-activemq-5.14.0/bin 启动 ./activemq start</p>
+<h2 id="打开web管理页面"><a href="#打开web管理页面" class="headerlink" title="打开web管理页面"></a>打开web管理页面</h2><p>访问<a href="http://IP:8161/admin" target="_blank" rel="noopener">http://IP:8161/admin</a></p>
+<p>启动后，activeMQ会占用两个端口，一个是负责接收发送消息的tcp端口:61616，一个是基于web负责用户界面化管理的端口:8161。这两个端口可以在conf下面的xml中找到。http服务器使用了jetty</p>
+<h1 id="项目集成activemq"><a href="#项目集成activemq" class="headerlink" title="项目集成activemq"></a>项目集成activemq</h1><h2 id="配置文件设置application-properties"><a href="#配置文件设置application-properties" class="headerlink" title="配置文件设置application.properties"></a>配置文件设置application.properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.activemq.broker-url=tcp://localhost:61616 </span><br><span class="line">spring.activemq.user=admin </span><br><span class="line">spring.activemq.password=admin </span><br><span class="line">spring.activemq.in-memory=true </span><br><span class="line">spring.activemq.pool.enabled=false</span><br></pre></td></tr></table></figure>
+<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component </span><br><span class="line">public class Producer implements CommandLineRunner &#123; </span><br><span class="line">    @Autowired </span><br><span class="line">        private JmsMessagingTemplate jmsMessagingTemplate; </span><br><span class="line">    @Autowired </span><br><span class="line">        private Queue queue; </span><br><span class="line">    @Override public void run(String... args) throws Exception &#123; </span><br><span class="line">        send(&quot;Sample message&quot;); </span><br><span class="line">        System.out.println(&quot;Message was sent to the Queue&quot;); </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    public void send(String msg) &#123; </span><br><span class="line">        this.jmsMessagingTemplate.convertAndSend(this.queue, msg); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Consumer &#123; </span><br><span class="line">    @JmsListener(destination = &quot;sample.queue&quot;) </span><br><span class="line">        public void receiveQueue(String text) &#123; </span><br><span class="line">            System.out.println(text); </span><br><span class="line">        &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication </span><br><span class="line">@EnableJms </span><br><span class="line">public class SampleActiveMQApplication &#123; </span><br><span class="line">    @Bean </span><br><span class="line">        public Queue queue() &#123; </span><br><span class="line">            return new ActiveMQQueue(&quot;sample.queue&quot;); </span><br><span class="line">        &#125; </span><br><span class="line">    public static void main(String[] args) &#123; </span><br><span class="line">        SpringApplication.run(SampleActiveMQApplication.class, args); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>代码参考<a href="https://github.com/spring-projects/spring-boot" target="_blank" rel="noopener">github地址</a></p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/29/defent/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/29/defent/" itemprop="url">常见网络攻击及处理办法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T11:35:30+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="跨站请求伪造-CSRF"><a href="#跨站请求伪造-CSRF" class="headerlink" title="跨站请求伪造(CSRF)"></a>跨站请求伪造(CSRF)</h1><h2 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h2><p>危害是攻击者可以盗用你的身份，以你的名义发送恶意请求。比如可以盗取你的账号，以你的身份发送邮件，购买商品等</p>
+<h2 id="例子"><a href="#例子" class="headerlink" title="例子"></a>例子</h2><p>在某个论坛管理页面，管理员可以在list.php页面执行删除帖子操作，根据URL判断删除帖子的id，像这样的一个URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">http://localhost/list.php?action=delete&amp;id=12</span><br></pre></td></tr></table></figure>
+<p>当恶意用户想管理员发送包含CSFR的邮件，骗取管理员访问 <a href="http://test.com/csrf.php" target="_blank" rel="noopener">http://test.com/csrf.php</a> 在这个恶意网页中只要包含这样的html语句就可以利用让管理员在不知<br>情的情况下删除帖子了<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;img alt=&quot;&quot; src=&quot;http://localhost/list.php?action=delete&amp;id=12&quot;/&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="使用post修改信息就安全了么？"><a href="#使用post修改信息就安全了么？" class="headerlink" title="使用post修改信息就安全了么？"></a>使用post修改信息就安全了么？</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">$action=$_POST[&apos;action&apos;];</span><br><span class="line">$id=$_POST[&apos;id&apos;];</span><br><span class="line">delete($action,$id);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>同样可以攻击<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">　　&lt;body&gt;</span><br><span class="line">　　　　&lt;iframe display=&quot;none&quot;&gt;</span><br><span class="line">　　　　　　&lt;form method=&quot;post&quot; action=&quot;http://localhost/list.php&quot;&gt;</span><br><span class="line">　　　　　　　　&lt;input type=&quot;hidden&quot; name=&quot;action&quot; value=&quot;delete&quot;&gt;</span><br><span class="line">　　　　　　　 &lt;input type=&quot;hidden&quot; name=&quot;id&quot; value=&quot;12&quot;&gt;</span><br><span class="line">&lt;input id=&quot;csfr&quot; type=&quot;submit&quot;/&gt;</span><br><span class="line">　　　　　　&lt;/form&gt;</span><br><span class="line">　　　　&lt;/iframe&gt;</span><br><span class="line"></span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">　　　　 document.getElementById(&apos;csfr&apos;).submit();</span><br><span class="line">　　　　&lt;/script&gt;</span><br><span class="line">　　&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<h2 id="如何防范"><a href="#如何防范" class="headerlink" title="如何防范"></a>如何防范</h2><ol>
+<li>使用post，不使用get修改信息</li>
+<li>验证码，所有表单的提交需要验证码，但是貌似用起来很麻烦，所以一些关键的操作可以</li>
+<li>在表单中预先植入一些加密信息，验证请求是此表单发送</li>
+</ol>
+<h1 id="跨站脚本攻击-XSS"><a href="#跨站脚本攻击-XSS" class="headerlink" title="跨站脚本攻击(XSS)"></a>跨站脚本攻击(XSS)</h1><h2 id="原理-1"><a href="#原理-1" class="headerlink" title="原理"></a>原理</h2><p>跨站脚本攻击(Cross Site Script为了区别于CSS简称为XSS)指的是恶意攻击者往Web页面里插入恶意html代码，当用户浏览该页之时，嵌入其中Web里面的htm<br>l代码会被执行，从而达到恶意用户的特殊目的</p>
+<h2 id="例子-1"><a href="#例子-1" class="headerlink" title="例子"></a>例子</h2><p>我们有个页面用于允许用户发表留言，然后在页面底部显示留言列表<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;?php include(&apos;/components/headerinclude.php&apos;);?&gt;&lt;/head&gt;</span><br><span class="line">&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">.comment-title&#123;</span><br><span class="line">    font-size:14px;</span><br><span class="line">margin: 6px 0px 2px 4px;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">.comment-body&#123;</span><br><span class="line">    font-size: 14px;</span><br><span class="line">color:#ccc;</span><br><span class="line">      font-style: italic;</span><br><span class="line">      border-bottom: dashed 1px #ccc;</span><br><span class="line">margin: 4px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot; src=&quot;/js/cookies.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;body&gt;</span><br><span class="line">&lt;form method=&quot;post&quot; action=&quot;list.php&quot;&gt;</span><br><span class="line">&lt;div style=&quot;margin:20px;&quot;&gt;</span><br><span class="line">&lt;div style=&quot;font-size:16px;font-weight:bold;&quot;&gt;Your Comment&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;padding:6px;&quot;&gt;</span><br><span class="line">Nick Name:</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">&lt;input name=&quot;name&quot; type=&quot;text&quot; style=&quot;width:300px;&quot;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;padding:6px;&quot;&gt;</span><br><span class="line">Comment:</span><br><span class="line">&lt;br/&gt;</span><br><span class="line">&lt;textarea name=&quot;comment&quot; style=&quot;height:100px; width:300px;&quot;&gt;&lt;/textarea&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;padding-left:230px;&quot;&gt;</span><br><span class="line">&lt;input type=&quot;submit&quot; value=&quot;POST&quot; style=&quot;padding:4px 0px; width:80px;&quot;/&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;div style=&quot;border-bottom:solid 1px #fff;margin-top:10px;&quot;&gt;</span><br><span class="line">&lt;div style=&quot;font-size:16px;font-weight:bold;&quot;&gt;Comments&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;?php </span><br><span class="line">require(&apos;/components/comments.php&apos;); </span><br><span class="line">if(!empty($_POST[&apos;name&apos;]))&#123;</span><br><span class="line">    addElement($_POST[&apos;name&apos;],$_POST[&apos;comment&apos;]);</span><br><span class="line">&#125;</span><br><span class="line">renderComments();</span><br><span class="line">?&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure></p>
+<p>addElement()方法用于添加新的留言，而renderComments()方法用于展留言列表，网页看起来是这样的<br><img src="http://img.blog.csdn.net/20171008105555518?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p>因为我们完全信任了用户输入，但有些别有用心的用户会像这样的输入<br><img src="http://img.blog.csdn.net/20171008104916455?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""><br>这样无论是谁访问这个页面的时候控制台都会输出“Hey you are a fool fish!”，如果这只是个恶意的小玩笑，有些人做的事情就不可爱了，有些用户会利用<br>这个漏洞窃取用户信息、诱骗人打开恶意网站或者下载恶意程序等</p>
+<h2 id="如何防范-1"><a href="#如何防范-1" class="headerlink" title="如何防范"></a>如何防范</h2><p>上面演示的是一个非常简单的XSS攻击，还有很多隐蔽的方式，但是其核心都是利用了脚本注入，因此我们解决办法其实很简单，不信赖用户输入，对特殊字符如”&lt;”,”&gt;”转义，就可以从根本上防止这一问题，当然很多解决方案都对XSS做了特定限制，如上面这中做法在ASP.NET中不幸不同，微软validateRequest对表单提交自动做了XSS验证。但防不胜防，总有些聪明的恶意用户会到我们的网站搞破坏，对自己站点不放心可以看看这个<a href="http://www.cnblogs.com/dsky/archive/2012/04/06/2434768.html" target="_blank" rel="noopener">XSS跨站测试代码大全</a>试试站点是否安全。</p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/29/nohup/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/29/nohup/" itemprop="url">Spring Boot后台启动不打印nohup.out</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T11:31:35+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nohup java -jar yatai_pro-0.0.1-SNAPSHOT.jar --spring.profiles.active=prod &gt;/dev/null &amp;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>/dev/null 表示将标准输出信息重定向到”黑洞”</p>
+</blockquote>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/29/nginx-strategy/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/29/nginx-strategy/" itemprop="url">nginx负载均衡策略</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T08:50:05+08:00">
+                2017-11-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="轮询（默认策略）"><a href="#轮询（默认策略）" class="headerlink" title="轮询（默认策略）"></a>轮询（默认策略）</h1><p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除</p>
+<h1 id="指定权重"><a href="#指定权重" class="headerlink" title="指定权重"></a>指定权重</h1><p>指定轮询几率，weight和访问比率成正比，用于后端服务器性能不均的情况。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">upstream servername &#123; </span><br><span class="line">    server 192.168.0.1 weight=1; </span><br><span class="line">    server 192.168.0.2 weight=12; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="IP绑定-ip-hash"><a href="#IP绑定-ip-hash" class="headerlink" title="IP绑定 ip_hash"></a>IP绑定 ip_hash</h1><p>每个请求按访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    ip_hash; </span><br><span class="line">    server 192.168.0.14:88; </span><br><span class="line">    server 192.168.0.15:80; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="fair（第三方）"><a href="#fair（第三方）" class="headerlink" title="fair（第三方）"></a>fair（第三方）</h1><p>按后端服务器的响应时间来分配请求，响应时间短的优先分配。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server server1; </span><br><span class="line">    server server2; </span><br><span class="line">    fair; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这种策略具有很强的自适应性，但是实际的网络环境往往不是那么简单，因此须慎用。</p>
+<h1 id="url-hash（第三方）"><a href="#url-hash（第三方）" class="headerlink" title="url_hash（第三方）"></a>url_hash（第三方）</h1><p>按访问url的hash结果来分配请求，使每个url定向到同一个后端服务器，后端服务器为缓存时比较有效。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">upstream backserver &#123; </span><br><span class="line">    server squid1:3128; </span><br><span class="line">    server squid2:3128; </span><br><span class="line">    hash $request_uri; </span><br><span class="line">    hash_method crc32; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+  </section>
+
+  
+  <nav class="pagination">
+    <a class="extend prev" rel="prev" href="/blog/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/blog/">1</a><a class="page-number" href="/blog/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/blog/page/4/">4</a><a class="extend next" rel="next" href="/blog/page/4/"><i class="fa fa-angle-right"></i></a>
+  </nav>
+
+
+
+          </div>
+          
+
+
+          
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/blog/images/1.jpg"
+                alt="老枪" />
+            
+              <p class="site-author-name" itemprop="name">老枪</p>
+              <p class="site-description motion-element" itemprop="description">后端 服务器 Java</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/blog/archives/">
+              
+                  <span class="site-state-item-count">35</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+
+            
+
+          </nav>
+
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="mailto:wwyknight@163.com" target="_blank" title="E-Mail">
+                    
+                      <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2015 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">老枪</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Pisces</a> v5.1.3</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/blog/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/blog/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/affix.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/blog/js/src/schemes/pisces.js?v=5.1.3"></script>
+
+
+
+  
+
+  
+
+
+  <script type="text/javascript" src="/blog/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
