@@ -3,7 +3,8 @@ title: Git笔记
 date: 2018-02-02 13:58:28
 tags:
 ---
-![](http://www.wailian.work/images/2018/02/06/d95260be85e5b41446a25914860307cbfa056a2c370c3-ZkMgle_fw658.th.jpg)
+
+![pic](http://www.wailian.work/images/2018/02/06/d3fb23176fe5686c8233ec7fc6b721fb52c96fe015a9e-l3cAeo_fw658.jpg)
 
 # 初始化项目
 
