@@ -1,25 +1,62 @@
 ---
-title: git新建项目推送远程
+title: Git笔记
 date: 2018-02-02 13:58:28
 tags:
 ---
+![](http://www.wailian.work/images/2018/02/06/d95260be85e5b41446a25914860307cbfa056a2c370c3-ZkMgle_fw658.th.jpg)
 
-1. 在github或者码云上新建仓库
+# 初始化项目
 
-2. git init在本地新建仓库
+## 在GitHub或者码云上新建仓库
 
-3. git remote add origin git@git.oschina.net:wangweiye/SpringBoot-Learning.git
+登录GitHub或者码云，新建仓库，不默认产生README文档
 
-   执行以上命令将本地仓库与远程仓库相连
+## 本地新建仓库
 
-4. git add .
+```
+git init
+```
 
-5. git commit -m ""
+## 本地仓库与远程相连
 
-6. git pull origin master
+```
+git remote add origin git@git.oschina.net:wangweiye/SpringBoot-Learning.git
+```
 
-   可能报错，fatal: refusing to merge unrelated histories
+## 提交本地到远程
 
-   解决方法：git pull origin master --allow-unrelated-histories
+```
+git add .
 
-7. git push -u origin master
+git commit -m ""
+
+git pull origin master
+
+git push -u origin master
+```
+
+# 标签
+
+## 列显已有的标签
+
+```
+git tag
+```
+
+## 新建轻量级标签
+
+```
+git tag v1.0.0
+```
+
+## 分享标签
+
+```
+git push origin [tagname]
+```
+
+## 删除远程tag
+
+```
+git push origin --delete tag [tagname]
+```

@@ -261,7 +261,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/blog/2018/02/02/git-remote/" itemprop="url">git新建项目推送远程</a></h1>
+                <a class="post-title-link" href="/blog/2018/02/02/git-remote/" itemprop="url">Git笔记</a></h1>
         
 
         <div class="post-meta">
@@ -313,25 +313,15 @@
       
         
           
-            <ol>
-<li><p>在github或者码云上新建仓库</p>
-</li>
-<li><p>git init在本地新建仓库</p>
-</li>
-<li><p>git remote add origin git@git.oschina.net:wangweiye/SpringBoot-Learning.git</p>
-<p>执行以上命令将本地仓库与远程仓库相连</p>
-</li>
-<li><p>git add .</p>
-</li>
-<li><p>git commit -m “”</p>
-</li>
-<li><p>git pull origin master</p>
-<p>可能报错，fatal: refusing to merge unrelated histories</p>
-<p>解决方法：git pull origin master –allow-unrelated-histories</p>
-</li>
-<li><p>git push -u origin master</p>
-</li>
-</ol>
+            <p><img src="http://www.wailian.work/images/2018/02/06/d95260be85e5b41446a25914860307cbfa056a2c370c3-ZkMgle_fw658.th.jpg" alt=""></p>
+<h1 id="初始化项目"><a href="#初始化项目" class="headerlink" title="初始化项目"></a>初始化项目</h1><h2 id="在GitHub或者码云上新建仓库"><a href="#在GitHub或者码云上新建仓库" class="headerlink" title="在GitHub或者码云上新建仓库"></a>在GitHub或者码云上新建仓库</h2><p>登录GitHub或者码云，新建仓库，不默认产生README文档</p>
+<h2 id="本地新建仓库"><a href="#本地新建仓库" class="headerlink" title="本地新建仓库"></a>本地新建仓库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="本地仓库与远程相连"><a href="#本地仓库与远程相连" class="headerlink" title="本地仓库与远程相连"></a>本地仓库与远程相连</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin git@git.oschina.net:wangweiye/SpringBoot-Learning.git</span><br></pre></td></tr></table></figure>
+<h2 id="提交本地到远程"><a href="#提交本地到远程" class="headerlink" title="提交本地到远程"></a>提交本地到远程</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">git add .</span><br><span class="line"></span><br><span class="line">git commit -m &quot;&quot;</span><br><span class="line"></span><br><span class="line">git pull origin master</span><br><span class="line"></span><br><span class="line">git push -u origin master</span><br></pre></td></tr></table></figure>
+<h1 id="标签"><a href="#标签" class="headerlink" title="标签"></a>标签</h1><h2 id="列显已有的标签"><a href="#列显已有的标签" class="headerlink" title="列显已有的标签"></a>列显已有的标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<h2 id="新建轻量级标签"><a href="#新建轻量级标签" class="headerlink" title="新建轻量级标签"></a>新建轻量级标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag v1.0.0</span><br></pre></td></tr></table></figure>
+<h2 id="分享标签"><a href="#分享标签" class="headerlink" title="分享标签"></a>分享标签</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin [tagname]</span><br></pre></td></tr></table></figure>
+<h2 id="删除远程tag"><a href="#删除远程tag" class="headerlink" title="删除远程tag"></a>删除远程tag</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin --delete tag [tagname]</span><br></pre></td></tr></table></figure>
 
           
         
