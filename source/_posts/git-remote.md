@@ -4,7 +4,7 @@ date: 2018-02-02 13:58:28
 tags:
 ---
 
-![pic](http://www.wailian.work/images/2018/02/06/d3fb23176fe5686c8233ec7fc6b721fb52c96fe015a9e-l3cAeo_fw658.jpg)
+![pic](http://www.wailian.work/images/2018/02/06/e58c7755f88b1e0ad82a30100cd3f781e3fe8f5970ada-GGAkXt_fw658.jpg)
 
 # 初始化项目
 
