@@ -4,6 +4,8 @@ date: 2018-03-01 17:05:06
 tags:
 ---
 
+![pic](http://www.wailian.work/images/2018/03/02/3b41bb4144a7478ef7d1937c3a0ec56975e163f61a9ba-n8Syo1_fw658.jpg)
+
 # 什么是WebSocket
 
 WebSocket协议是基于TCP的一种新的网络协议。它实现了浏览器与服务器全双工(full-duplex)通信——允许服务器主动发送信息给客户端。
@@ -190,5 +192,7 @@ public class App {
 </body>
 </html>
 ```
+![演示图](http://www.wailian.work/images/2018/03/02/WX20180302-094543.png)
+
 
 [代码地址](https://github.com/wangweiye01/websocket)
