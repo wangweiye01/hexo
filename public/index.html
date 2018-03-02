@@ -242,6 +242,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2018/03/01/websocket/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2018/03/01/websocket/" itemprop="url">Spring Boot实现WebSocket消息推送</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-01T17:05:06+08:00">
+                2018-03-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="什么是WebSocket"><a href="#什么是WebSocket" class="headerlink" title="什么是WebSocket"></a>什么是WebSocket</h1><p>WebSocket协议是基于TCP的一种新的网络协议。它实现了浏览器与服务器全双工(full-duplex)通信——允许服务器主动发送信息给客户端。</p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Configuration</span><br><span class="line">@EnableWebSocketMessageBroker</span><br><span class="line">public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void configureMessageBroker(MessageBrokerRegistry config) &#123;</span><br><span class="line">		config.enableSimpleBroker(&quot;/topic&quot;);</span><br><span class="line">		config.setApplicationDestinationPrefixes(&quot;/app&quot;);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public void registerStompEndpoints(StompEndpointRegistry registry) &#123;</span><br><span class="line">		registry.addEndpoint(&quot;/my-websocket&quot;).withSockJS();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里配置了以”/app”开头的websocket请求url和名为”my-websocket”的endpoint</p>
+<ol>
+<li>@EnableWebSocketMessageBroker注解表示开启使用STOMP协议来传输基于代理的消息</li>
+<li>registerStompEndpoints方法表示注册STOMP协议的节点，并指定映射的URL</li>
+<li><code>registry.addEndpoint(&quot;/my-websocket&quot;).withSockJS()</code>这一行代码用来注册STOMP协议节点，同时指定使用SockJS协议。</li>
+<li>configureMessageBroker方法用来配置消息代理，由于我们是实现推送功能，这里的消息代理是/topic</li>
+</ol>
+<h1 id="推送消息类"><a href="#推送消息类" class="headerlink" title="推送消息类"></a>推送消息类</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">public class SocketMessage &#123;</span><br><span class="line"></span><br><span class="line">	public String message;</span><br><span class="line"></span><br><span class="line">	public String date;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="控制器"><a href="#控制器" class="headerlink" title="控制器"></a>控制器</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">@Controller</span><br><span class="line">@EnableScheduling</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class App &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(App.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Autowired</span><br><span class="line">	private SimpMessagingTemplate messagingTemplate;</span><br><span class="line"></span><br><span class="line">	@GetMapping(&quot;/&quot;)</span><br><span class="line">	public String index() &#123;</span><br><span class="line">		return &quot;index&quot;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@MessageMapping(&quot;/send&quot;)</span><br><span class="line">	@SendTo(&quot;/topic/send&quot;)</span><br><span class="line">	public SocketMessage send(SocketMessage message) throws Exception &#123;</span><br><span class="line">		DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">		message.date = df.format(new Date());</span><br><span class="line">		return message;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Scheduled(fixedRate = 1000)</span><br><span class="line">	@SendTo(&quot;/topic/callback&quot;)</span><br><span class="line">	public Object callback() throws Exception &#123;</span><br><span class="line">		// 发现消息</span><br><span class="line">		DateFormat df = new SimpleDateFormat(&quot;yyyy-MM-dd HH:mm:ss&quot;);</span><br><span class="line">		messagingTemplate.convertAndSend(&quot;/topic/callback&quot;, df.format(new Date()));</span><br><span class="line">		return &quot;callback&quot;;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>@MessageMapping</code>注解和<code>@RequestMapping</code>类似，用来发送消息到特定路径</p>
+<p><code>@SendTo</code>注解表示当服务器有消息需要推送的时候，会对订阅了<code>@SendTo</code>中路径的客户端发送消息</p>
+<h1 id="前端脚本"><a href="#前端脚本" class="headerlink" title="前端脚本"></a>前端脚本</h1><p>我们这个案例需要三个js脚本文件，分别是STOMP协议的客户端脚本stomp.js、SockJS的客户端脚本sock.js以及jQuery</p>
+<h1 id="演示页面"><a href="#演示页面" class="headerlink" title="演示页面"></a>演示页面</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">&lt;head&gt;</span><br><span class="line">&lt;title&gt;websocket&lt;/title&gt;</span><br><span class="line">&lt;script src=&quot;//cdn.bootcss.com/angular.js/1.5.6/angular.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script src=&quot;https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	/*&lt;![CDATA[*/</span><br><span class="line"></span><br><span class="line">	var stompClient = null;</span><br><span class="line"></span><br><span class="line">	var app = angular.module(&apos;app&apos;, []);</span><br><span class="line">	app.controller(&apos;MainController&apos;, function($rootScope, $scope, $http) &#123;</span><br><span class="line"></span><br><span class="line">		$scope.data = &#123;</span><br><span class="line">			//连接状态</span><br><span class="line">			connected : false,</span><br><span class="line">			//消息</span><br><span class="line">			message : &apos;&apos;,</span><br><span class="line">			rows : []</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		//连接</span><br><span class="line">		$scope.connect = function() &#123;</span><br><span class="line">			var socket = new SockJS(&apos;/my-websocket&apos;);</span><br><span class="line">			stompClient = Stomp.over(socket);</span><br><span class="line">			stompClient.connect(&#123;&#125;, function(frame) &#123;</span><br><span class="line">				// 注册发送消息</span><br><span class="line">				stompClient.subscribe(&apos;/topic/send&apos;, function(msg) &#123;</span><br><span class="line">					$scope.data.rows.push(JSON.parse(msg.body));</span><br><span class="line">					$scope.data.connected = true;</span><br><span class="line">					$scope.$apply();</span><br><span class="line">				&#125;);</span><br><span class="line">				// 注册推送时间回调</span><br><span class="line">				stompClient.subscribe(&apos;/topic/callback&apos;, function(r) &#123;</span><br><span class="line">					$scope.data.time = &apos;当前服务器时间：&apos; + r.body;</span><br><span class="line">					$scope.data.connected = true;</span><br><span class="line">					$scope.$apply();</span><br><span class="line">				&#125;);</span><br><span class="line"></span><br><span class="line">				$scope.data.connected = true;</span><br><span class="line">				$scope.$apply();</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;;</span><br><span class="line"></span><br><span class="line">		$scope.disconnect = function() &#123;</span><br><span class="line">			if (stompClient != null) &#123;</span><br><span class="line">				stompClient.disconnect();</span><br><span class="line">			&#125;</span><br><span class="line">			$scope.data.connected = false;</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		$scope.send = function() &#123;</span><br><span class="line">			stompClient.send(&quot;/app/send&quot;, &#123;&#125;, JSON.stringify(&#123;</span><br><span class="line">				&apos;message&apos; : $scope.data.message</span><br><span class="line">			&#125;));</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br><span class="line">	/*]]&gt;*/</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;/head&gt;</span><br><span class="line">&lt;body ng-app=&quot;app&quot; ng-controller=&quot;MainController&quot;&gt;</span><br><span class="line">	&lt;label&gt;WebSocket连接状态:&lt;/label&gt;</span><br><span class="line">	&lt;button type=&quot;button&quot; ng-disabled=&quot;data.connected&quot; ng-click=&quot;connect()&quot;&gt;连接&lt;/button&gt;</span><br><span class="line">	&lt;button type=&quot;button&quot; ng-click=&quot;disconnect()&quot;</span><br><span class="line">		ng-disabled=&quot;!data.connected&quot;&gt;断开&lt;/button&gt;</span><br><span class="line">	&lt;br /&gt;</span><br><span class="line">	&lt;br /&gt;</span><br><span class="line">	&lt;div ng-show=&quot;data.connected&quot;&gt;</span><br><span class="line">		&lt;label&gt;&#123;&#123;data.time&#125;&#125;&lt;/label&gt; &lt;br /&gt; &lt;br /&gt; &lt;input type=&quot;text&quot;</span><br><span class="line">			ng-model=&quot;data.message&quot; placeholder=&quot;请输入内容...&quot; /&gt;</span><br><span class="line">		&lt;button ng-click=&quot;send()&quot; type=&quot;button&quot;&gt;发送&lt;/button&gt;</span><br><span class="line">		&lt;br /&gt; &lt;br /&gt; 消息列表： &lt;br /&gt;</span><br><span class="line">		&lt;table&gt;</span><br><span class="line">			&lt;thead&gt;</span><br><span class="line">				&lt;tr&gt;</span><br><span class="line">					&lt;th&gt;内容&lt;/th&gt;</span><br><span class="line">					&lt;th&gt;时间&lt;/th&gt;</span><br><span class="line">				&lt;/tr&gt;</span><br><span class="line">			&lt;/thead&gt;</span><br><span class="line">			&lt;tbody&gt;</span><br><span class="line">				&lt;tr ng-repeat=&quot;row in data.rows&quot;&gt;</span><br><span class="line">					&lt;td&gt;&#123;&#123;row.message&#125;&#125;&lt;/td&gt;</span><br><span class="line">					&lt;td&gt;&#123;&#123;row.date&#125;&#125;&lt;/td&gt;</span><br><span class="line">				&lt;/tr&gt;</span><br><span class="line">			&lt;/tbody&gt;</span><br><span class="line">		&lt;/table&gt;</span><br><span class="line">	&lt;/div&gt;</span><br><span class="line">&lt;/body&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/wangweiye01/websocket" target="_blank" rel="noopener">代码地址</a></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2018/02/02/git-remote/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1628,191 +1763,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2018/01/09/spring-cloud5/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="老枪">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/blog/images/1.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="老枪的世界">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/blog/2018/01/09/spring-cloud5/" itemprop="url">5.Spring Cloud：分布式配置中心【Dalston版】</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-09T09:28:55+08:00">
-                2018-01-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Spring Cloud Config是Spring Cloud团队创建的一个全新项目，用来为分布式系统中的基础设施和微服务应用提供集中化的外部配置支持，它分为服务端与客户端两个部分。其中服务端也称为分布式配置中心，它是一个独立的微服务应用，用来连接配置仓库并为客户端提供获取配置信息、加密/解密信息等访问接口；而客户端则是微服务架构中的各个微服务应用或基础设施，它们通过指定的配置中心来管理应用资源与业务相关的配置内容，并在启动的时候从配置中心获取和加载配置信息。Spring Cloud Config实现了对服务端和客户端中环境变量和属性配置的抽象映射，所以它除了适用于Spring构建的应用程序之外，也可以在任何其他语言运行的应用程序中使用。由于Spring Cloud Config实现的配置中心默认采用Git来存储配置信息，所以使用Spring Cloud Config构建的配置服务器，天然就支持对微服务应用配置信息的版本管理，并且可以通过Git客户端工具来方便的管理和访问配置内容。当然它也提供了对其他存储方式的支持，比如：SVN仓库、本地化文件系统。</p>
-<p>在本文中，我们将学习如何构建一个基于Git存储的分布式配置中心，并对客户端进行改造，并让其能够从配置中心获取配置信息并绑定到代码中的整个过程。</p>
-<h1 id="准备配置仓库"><a href="#准备配置仓库" class="headerlink" title="准备配置仓库"></a>准备配置仓库</h1><ul>
-<li><p>准备一个git仓库，可以在码云或Github上创建都可以。比如本文准备的仓库示例：<br><a href="http://git.oschina.net/didispace/config-repo-demo" target="_blank" rel="noopener">http://git.oschina.net/didispace/config-repo-demo</a></p>
-</li>
-<li><p>假设我们读取配置中心的应用名为config-client，那么我们可以在git仓库中该项目的默认配置文件config-client.yml：</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">info:</span><br><span class="line">  profile: default</span><br></pre></td></tr></table></figure>
-<ul>
-<li>为了演示加载不同环境的配置，我们可以在git仓库中再创建一个针对dev环境的配置文件config-client-dev.yml：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">info:</span><br><span class="line">  profile: dev</span><br></pre></td></tr></table></figure>
-<h1 id="构建配置中心"><a href="#构建配置中心" class="headerlink" title="构建配置中心"></a>构建配置中心</h1><ul>
-<li>创建一个基础的Spring Boot工程，命名为：config-server-git，并在pom.xml中引入下面的依赖（省略了parent和dependencyManagement部分）：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-config-server&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建Spring Boot的程序主类，并添加@EnableConfigServer注解，开启Spring Cloud Config的服务端功能。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@EnableConfigServer</span><br><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new SpringApplicationBuilder(Application.class).web(true).run(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>在application.yml中添加配置服务的基本信息以及Git仓库的相关信息，例如：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring</span><br><span class="line">  application:</span><br><span class="line">    name: config-server</span><br><span class="line">  cloud:</span><br><span class="line">    config:</span><br><span class="line">      server:</span><br><span class="line">        git:</span><br><span class="line">          uri: http://git.oschina.net/didispace/config-repo-demo/</span><br><span class="line">server:</span><br><span class="line">  port: 1201</span><br></pre></td></tr></table></figure>
-<p>到这里，使用一个通过Spring Cloud Config实现，并使用Git管理配置内容的分布式配置中心就已经完成了。我们可以将该应用先启动起来，确保没有错误产生，然后再尝试下面的内容。</p>
-<blockquote>
-<p>如果我们的Git仓库需要权限访问，那么可以通过配置下面的两个属性来实现<br>spring.cloud.config.server.git.username：访问Git仓库的用户名<br>spring.cloud.config.server.git.password：访问Git仓库的用户密码</p>
-</blockquote>
-<p>完成了这些准备工作之后，我们就可以通过浏览器、POSTMAN或CURL等工具直接来访问到我们的配置内容了。访问配置信息的URL与配置文件的映射关系如下：</p>
-<ul>
-<li>/{application}/{profile}[/{label}]</li>
-<li>/{application}-{profile}.yml</li>
-<li>/{label}/{application}-{profile}.yml</li>
-<li>/{application}-{profile}.properties</li>
-<li>/{label}/{application}-{profile}.properties</li>
-</ul>
-<p>上面的url会映射{application}-{profile}.properties对应的配置文件，其中{label}对应Git上不同的分支，默认为master。我们可以尝试构造不同的url来访问不同的配置内容，比如，要访问master分支，config-client应用的dev环境，就可以访问这个url：<a href="http://localhost:1201/config-client/dev/master，并获得如下返回：" target="_blank" rel="noopener">http://localhost:1201/config-client/dev/master，并获得如下返回：</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;name&quot;: &quot;config-client&quot;,</span><br><span class="line">    &quot;profiles&quot;: [</span><br><span class="line">        &quot;dev&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;label&quot;: &quot;master&quot;,</span><br><span class="line">    &quot;version&quot;: null,</span><br><span class="line">    &quot;state&quot;: null,</span><br><span class="line">    &quot;propertySources&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;http://git.oschina.net/didispace/config-repo-demo/config-client-dev.yml&quot;,</span><br><span class="line">            &quot;source&quot;: &#123;</span><br><span class="line">                &quot;info.profile&quot;: &quot;dev&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;,</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;http://git.oschina.net/didispace/config-repo-demo/config-client.yml&quot;,</span><br><span class="line">            &quot;source&quot;: &#123;</span><br><span class="line">                &quot;info.profile&quot;: &quot;default&quot;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>我们可以看到该Json中返回了应用名：config-client，环境名：dev，分支名：master，以及default环境和dev环境的配置内容。</p>
-<h1 id="构建客户端"><a href="#构建客户端" class="headerlink" title="构建客户端"></a>构建客户端</h1><p>在完成了上述验证之后，确定配置服务中心已经正常运作，下面我们尝试如何在微服务应用中获取上述的配置信息。</p>
-<ul>
-<li>创建一个Spring Boot应用，命名为config-client，并在pom.xml中引入下述依赖：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependencies&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-boot-starter-web&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">    &lt;dependency&gt;</span><br><span class="line">        &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">        &lt;artifactId&gt;spring-cloud-starter-config&lt;/artifactId&gt;</span><br><span class="line">    &lt;/dependency&gt;</span><br><span class="line">&lt;/dependencies&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建Spring Boot的应用主类，具体如下：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication</span><br><span class="line">public class Application &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        new SpringApplicationBuilder(Application.class).web(true).run(args);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>创建bootstrap.yml配置，来指定获取配置文件的config-server-git位置，例如：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">spring:</span><br><span class="line">  application:</span><br><span class="line">    name: config-client</span><br><span class="line">  cloud:</span><br><span class="line">    config:</span><br><span class="line">      uri: http://localhost:1201/</span><br><span class="line">      profile: default</span><br><span class="line">      label: master</span><br><span class="line">server:</span><br><span class="line">  port: 2001</span><br></pre></td></tr></table></figure>
-<p>上述配置参数与Git中存储的配置文件中各个部分的对应关系如下：</p>
-<ul>
-<li>spring.application.name：对应配置文件规则中的{application}部分</li>
-<li>spring.cloud.config.profile：对应配置文件规则中的{profile}部分</li>
-<li>spring.cloud.config.label：对应配置文件规则中的{label}部分</li>
-<li>spring.cloud.config.uri：配置中心config-server的地址</li>
-</ul>
-<ul>
-<li>这里需要格外注意：上面这些属性必须配置在bootstrap.properties中，这样config-server中的配置信息才能被正确加载 *</li>
-</ul>
-<p>在完成了上面你的代码编写之后，读者可以将config-server-git、config-client都启动起来，然后访问<a href="http://localhost:2001/info" target="_blank" rel="noopener">http://localhost:2001/info</a> ，我们可以看到该端点将会返回从git仓库中获取的配置信息：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    &quot;profile&quot;: &quot;default&quot;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>另外，我们也可以修改config-client的profile为dev来观察加载配置的变化。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -1867,7 +1817,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">38</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
