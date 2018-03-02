@@ -108,7 +108,6 @@ public class App {
 <script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
 <script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
 <script type="text/javascript">
-	/*<![CDATA[*/
 
 	var stompClient = null;
 
@@ -159,7 +158,6 @@ public class App {
 			}));
 		}
 	});
-	/*]]>*/
 </script>
 </head>
 <body ng-app="app" ng-controller="MainController">
