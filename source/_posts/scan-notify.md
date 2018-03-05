@@ -97,6 +97,25 @@ String pool(String uuid) {
 }
 ```
 
+获得状态
+
+```
+public synchronized boolean getScanStatus() {
+    try {
+        if (!isScan()) { //如果还未扫描，则等待
+            this.wait();
+        }
+        if (isScan()) {
+            return true;
+        }
+    } catch (InterruptedException e) {
+        // TODO Auto-generated catch block
+        e.printStackTrace();
+    }
+    return false;
+}
+```
+
 新开线程防止页面访问超时
 
 ```
@@ -113,11 +132,9 @@ class ScanCounter implements Runnable {
 
     @Override
     public void run() {
-        // TODO Auto-generated method stub
         try {
             Thread.sleep(timeout);
         } catch (InterruptedException e) {
-            // TODO Auto-generated catch block
             e.printStackTrace();
         }
         notifyPool(uuid);
@@ -151,6 +168,19 @@ String login(@PathVariable String uuid) {
     pool.scanSuccess();
 
     return "扫码完成，登录成功";
+}
+```
+
+扫码成功，设置扫码状态，唤起线程
+
+```
+public synchronized void scanSuccess() {
+    try {
+        setScan(true);
+        this.notifyAll();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
 }
 ```
 
