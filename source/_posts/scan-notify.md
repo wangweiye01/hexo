@@ -54,30 +54,30 @@ public static Map<String, ScanPool> cacheMap = new ConcurrentHashMap<String, Sca
 
 ```
 @RequestMapping("/qrcode/{uuid}")
-    @ResponseBody
-    String createQRCode(@PathVariable String uuid, HttpServletResponse response) {
-        System.out.println("生成二维码");
+@ResponseBody
+String createQRCode(@PathVariable String uuid, HttpServletResponse response) {
+    System.out.println("生成二维码");
 
-        String text = "http://2b082e46.ngrok.io/login/" + uuid;
-        int width = 300;
-        int height = 300;
-        String format = "png";
-        //将UUID放入缓存
-        ScanPool pool = new ScanPool();
-        PoolCache.cacheMap.put(uuid, pool);
-        try {
-            Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
-            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
-            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); //容错率
-            BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
-            MatrixToImageWriter.writeToStream(bitMatrix, format, response.getOutputStream());
-        } catch (WriterException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+    String text = "http://2b082e46.ngrok.io/login/" + uuid;
+    int width = 300;
+    int height = 300;
+    String format = "png";
+    //将UUID放入缓存
+    ScanPool pool = new ScanPool();
+    PoolCache.cacheMap.put(uuid, pool);
+    try {
+        Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+        hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+        hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); //容错率
+        BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
+        MatrixToImageWriter.writeToStream(bitMatrix, format, response.getOutputStream());
+    } catch (WriterException e) {
+        e.printStackTrace();
+    } catch (IOException e) {
+        e.printStackTrace();
     }
+    return null;
+}
 ```
 
 生成二维码，并将UUID放入缓存中
