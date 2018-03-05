@@ -34,4 +34,131 @@ tags:
 步骤大概就是如此，但是有个问题，步骤3如果请求超时，如何处理？处理方式是，一段固定时间后，返回408（timeout）
 
 
-对比[代码](https://github.com/wangweiye01/scan_login)很容易看实现原理
+# 生成二维码
+
+```
+@RequestMapping("/qrcode/{uuid}")
+    @ResponseBody
+    String createQRCode(@PathVariable String uuid, HttpServletResponse response) {
+        System.out.println("生成二维码");
+
+        String text = "http://2b082e46.ngrok.io/login/" + uuid;
+        int width = 300;
+        int height = 300;
+        String format = "png";
+        //将UUID放入缓存
+        ScanPool pool = new ScanPool();
+        PoolCache.cacheMap.put(uuid, pool);
+        try {
+            Map<EncodeHintType, Object> hints = new HashMap<EncodeHintType, Object>();
+            hints.put(EncodeHintType.CHARACTER_SET, "utf-8");
+            hints.put(EncodeHintType.ERROR_CORRECTION, ErrorCorrectionLevel.H); //容错率
+            BitMatrix bitMatrix = new MultiFormatWriter().encode(text, BarcodeFormat.QR_CODE, width, height, hints);
+            MatrixToImageWriter.writeToStream(bitMatrix, format, response.getOutputStream());
+        } catch (WriterException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+```
+
+生成二维码，并将UUID放入缓存中
+
+此处需要注意，二维码url必须是外网可以访问地址，此处可以使用[内网穿透工具](https://ngrok.com/)
+
+
+# 验证是否登录
+
+前端发起请求，验证该二维码是否已经被扫登录
+
+```
+@RequestMapping("/pool")
+@ResponseBody
+String pool(String uuid) {
+    System.out.println("检测[" + uuid + "]是否登录");
+
+    ScanPool pool = PoolCache.cacheMap.get(uuid);
+
+    if (pool == null) {
+        return "timeout";
+    }
+
+    //使用计时器，固定时间后不再等待扫描结果--防止页面访问超时
+    new Thread(new ScanCounter(uuid)).start();
+
+    boolean scanFlag = pool.getScanStatus();
+    if (scanFlag) {
+        return "success";
+    } else {
+        return "fail";
+    }
+}
+```
+
+新开线程防止页面访问超时
+
+```
+class ScanCounter implements Runnable {
+
+    public Long timeout = 27000L;
+
+    //传入的对象
+    private String uuid;
+
+    public ScanCounter(String p) {
+        uuid = p;
+    }
+
+    @Override
+    public void run() {
+        // TODO Auto-generated method stub
+        try {
+            Thread.sleep(timeout);
+        } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        notifyPool(uuid);
+    }
+
+    public synchronized void notifyPool(String uuid) {
+        ScanPool pool = PoolCache.cacheMap.get(uuid);
+        pool.notifyPool();
+    }
+
+}
+```
+
+![verify](http://www.wailian.work/images/2018/03/05/code4c40c.png)
+
+
+# 扫码
+
+```
+@RequestMapping("/login/{uuid}")
+@ResponseBody
+String login(@PathVariable String uuid) {
+
+    ScanPool pool = PoolCache.cacheMap.get(uuid);
+
+    if (pool == null) {
+        return "timeout,scan fail";
+    }
+    
+    // 设置被扫状态，唤起线程
+    pool.scanSuccess();
+
+    return "扫码完成，登录成功";
+}
+```
+
+![](http://www.wailian.work/images/2018/03/05/ok.png)
+
+手机扫码后
+
+![](http://www.wailian.work/images/2018/03/05/mobile.jpg)
+
+
+对比[完整代码](https://github.com/wangweiye01/scan_login)很容易看实现原理
