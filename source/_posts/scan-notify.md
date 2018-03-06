@@ -102,9 +102,10 @@ String pool(String uuid) {
     }
 
     //使用计时器，固定时间后不再等待扫描结果--防止页面访问超时
-    new Thread(new ScanCounter(uuid)).start();
+    new Thread(new ScanCounter(pool)).start();
 
     boolean scanFlag = pool.getScanStatus();
+
     if (scanFlag) {
         return "success";
     } else {
@@ -130,6 +131,14 @@ public synchronized boolean getScanStatus() {
     }
     return false;
 }
+
+public synchronized void notifyPool() {
+    try {
+        this.notifyAll();
+    } catch (Exception e) {
+        e.printStackTrace();
+    }
+}
 ```
 
 新开线程防止页面访问超时
@@ -140,10 +149,10 @@ class ScanCounter implements Runnable {
     public Long timeout = 27000L;
 
     //传入的对象
-    private String uuid;
+    private ScanPool scanPool;
 
-    public ScanCounter(String p) {
-        uuid = p;
+    public ScanCounter(ScanPool scanPool) {
+        this.scanPool = scanPool;
     }
 
     @Override
@@ -153,14 +162,12 @@ class ScanCounter implements Runnable {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        notifyPool(uuid);
+        notifyPool(scanPool);
     }
 
-    public synchronized void notifyPool(String uuid) {
-        ScanPool pool = PoolCache.cacheMap.get(uuid);
-        pool.notifyPool();
+    public synchronized void notifyPool(ScanPool scanPool) {
+        scanPool.notifyPool();
     }
-
 }
 ```
 
