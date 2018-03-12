@@ -90,6 +90,25 @@ https://github.com/shadowsocks
 商店搜索super wingy
 ![super_wingy](http://img.blog.csdn.net/20171110092642061?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
 
+# KCPTun加速
+
+搭建好了Shadowsocks相当于搭建成功了梯子，但是梯子太长，即时梯子带宽足够宽，线路质量也是不忍直视，此时就需要KCPTun了。
+
+KCPTun是一个使用可信UDP来加速TCP传输速度的网络软件。
+
+KCP 是一个快速可靠协议，能以比 TCP浪费10%-20%的带宽的代价，换取平均延迟降低 30%-40%，且最大延迟降低三倍的传输效果。
+
+## KCPTun服务安装
+
+```
+// 下载脚本
+wget https://raw.githubusercontent.com/kuoruan/kcptun_installer/master/kcptun.sh
+// 赋予权限
+chmod +x ./kcptun.sh
+// 执行脚本
+./kcptun.sh
+```
+
 # vultr购买推荐地址
 
 ```
