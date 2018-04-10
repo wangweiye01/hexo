@@ -1,7 +1,7 @@
 ---
 title: 2.Spring Cloud：服务消费（基础）【Dalston版】
 date: 2018-01-08 16:38:41
-tags:
+top: 1
 ---
 > 通过上一篇《Spring Cloud：服务注册与发现》我们已经成功地将服务提供者：eureka-client注册到了Eureka服务注册中心上了，同时我们也通过DiscoveryClient接口的getServices获取了当前客户端缓存的所有服务清单，那么接下来我们要学习的就是：如何去消费服务器提供者的接口？
 

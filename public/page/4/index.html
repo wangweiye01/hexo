@@ -242,6 +242,141 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/30/cache-db/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="老枪">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/blog/images/1.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="老枪的世界">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h2 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/blog/2017/11/30/cache-db/" itemprop="url">如何保持数据库和缓存的一致性</a></h2>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-30T22:45:06+08:00">
+                2017-11-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="更新缓存策略"><a href="#更新缓存策略" class="headerlink" title="更新缓存策略"></a>更新缓存策略</h1><ul>
+<li>失效：应用程序从cache取数据，没有得到，则从数据库取数据，然后将数据放入cache </li>
+<li>命中：应用从cache取数据，若取到则返回 </li>
+<li>更新：把数据更新到数据库，然后使cache失效</li>
+</ul>
+<p>借用网上两张图<br><img src="http://img.blog.csdn.net/20170726111231331?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<p><img src="http://img.blog.csdn.net/20170726111304065?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc2luYXRfMTY3MTI2NzE=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
+<h1 id="有没有其他策略"><a href="#有没有其他策略" class="headerlink" title="有没有其他策略?"></a>有没有其他策略?</h1><p>读操作容易理解，现在讨论一下写的操作</p>
+<h2 id="如果先使cache失效，后更新数据库，是否可行"><a href="#如果先使cache失效，后更新数据库，是否可行" class="headerlink" title="如果先使cache失效，后更新数据库，是否可行"></a>如果先使cache失效，后更新数据库，是否可行</h2><p>这么做引发的问题是，如果A,B两个线程同时要更新数据，并且A,B已经都做完了删除缓存这一步，接下来，A先更新了数据库，C线程读取数据，由于缓存没有，则查数据库，并把A更新的数据，写入了缓存，最后B更新数据库。那么缓存和数据库的值就不一致了。</p>
+<h2 id="如果先把数据库更新，然后把cache更新（不是失效），是否可行"><a href="#如果先把数据库更新，然后把cache更新（不是失效），是否可行" class="headerlink" title="如果先把数据库更新，然后把cache更新（不是失效），是否可行"></a>如果先把数据库更新，然后把cache更新（不是失效），是否可行</h2><p>这么做引发的问题是，如果A,B两个线程同时做数据更新，A先更新了数据库，B后更新数据库，则此时数据库里存的是B的数据。而更新缓存的时候，是B先更新了缓存，而A后更新了缓存，则缓存里是A的数据。这样缓存和数据库的数据也不一致。</p>
+<h2 id="如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？"><a href="#如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？" class="headerlink" title="如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？"></a>如果更新数据时，更新数据库成功，而失效cache时失败怎么解决？</h2><ul>
+<li>对删除缓存进行重试，数据的一致性要求越高，我越是重试得快。 </li>
+<li>定期全量更新，简单地说，就是我定期把缓存全部清掉，然后再全量加载。 </li>
+<li>给所有的缓存一个失效期。（绝招，任何不一致，都可以靠失效期解决，失效期越短，数据一致性越高。但是失效期越短，查数据库就会越频繁。因此失效期应该根据业务来定）</li>
+</ul>
+<p><strong>不要缓存那些对数据一致性要求很高的数据</strong></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="https://wangweiye01.github.io/blog/blog/2017/11/29/activemq/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -318,12 +453,14 @@
 <p>进去bin目录 cd apache-activemq-5.14.0/bin 启动 ./activemq start</p>
 <h2 id="打开web管理页面"><a href="#打开web管理页面" class="headerlink" title="打开web管理页面"></a>打开web管理页面</h2><p>访问<a href="http://IP:8161/admin" target="_blank" rel="noopener">http://IP:8161/admin</a></p>
 <p>启动后，activeMQ会占用两个端口，一个是负责接收发送消息的tcp端口:61616，一个是基于web负责用户界面化管理的端口:8161。这两个端口可以在conf下面的xml中找到。http服务器使用了jetty</p>
-<h1 id="项目集成activemq"><a href="#项目集成activemq" class="headerlink" title="项目集成activemq"></a>项目集成activemq</h1><h2 id="配置文件设置application-properties"><a href="#配置文件设置application-properties" class="headerlink" title="配置文件设置application.properties"></a>配置文件设置application.properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">spring.activemq.broker-url=tcp://localhost:61616 </span><br><span class="line">spring.activemq.user=admin </span><br><span class="line">spring.activemq.password=admin </span><br><span class="line">spring.activemq.in-memory=true </span><br><span class="line">spring.activemq.pool.enabled=false</span><br></pre></td></tr></table></figure>
-<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Component </span><br><span class="line">public class Producer implements CommandLineRunner &#123; </span><br><span class="line">    @Autowired </span><br><span class="line">        private JmsMessagingTemplate jmsMessagingTemplate; </span><br><span class="line">    @Autowired </span><br><span class="line">        private Queue queue; </span><br><span class="line">    @Override public void run(String... args) throws Exception &#123; </span><br><span class="line">        send(&quot;Sample message&quot;); </span><br><span class="line">        System.out.println(&quot;Message was sent to the Queue&quot;); </span><br><span class="line">    &#125; </span><br><span class="line"></span><br><span class="line">    public void send(String msg) &#123; </span><br><span class="line">        this.jmsMessagingTemplate.convertAndSend(this.queue, msg); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Component</span><br><span class="line">public class Consumer &#123; </span><br><span class="line">    @JmsListener(destination = &quot;sample.queue&quot;) </span><br><span class="line">        public void receiveQueue(String text) &#123; </span><br><span class="line">            System.out.println(text); </span><br><span class="line">        &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="程序入口"><a href="#程序入口" class="headerlink" title="程序入口"></a>程序入口</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@SpringBootApplication </span><br><span class="line">@EnableJms </span><br><span class="line">public class SampleActiveMQApplication &#123; </span><br><span class="line">    @Bean </span><br><span class="line">        public Queue queue() &#123; </span><br><span class="line">            return new ActiveMQQueue(&quot;sample.queue&quot;); </span><br><span class="line">        &#125; </span><br><span class="line">    public static void main(String[] args) &#123; </span><br><span class="line">        SpringApplication.run(SampleActiveMQApplication.class, args); </span><br><span class="line">    &#125; </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="项目集成activemq"><a href="#项目集成activemq" class="headerlink" title="项目集成activemq"></a>项目集成activemq</h1><h2 id="配置文件设置application-properties"><a href="#配置文件设置application-properties" class="headerlink" title="配置文件设置application.properties"></a>配置文件设置application.properties</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">spring.activemq.broker-url=tcp://localhost:61616 </span><br><span class="line">spring.activemq.user=admin </span><br><span class="line">spring.activemq.password=admin </span><br><span class="line">spring.activemq.pool.enabled=false</span><br></pre></td></tr></table></figure>
+<h2 id="生产者"><a href="#生产者" class="headerlink" title="生产者"></a>生产者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Producer &#123;</span><br><span class="line">    @Resource</span><br><span class="line">    private JmsMessagingTemplate jmsMessagingTemplate;</span><br><span class="line"></span><br><span class="line">    public void sendMsg(String destName, String message) &#123;</span><br><span class="line">        Destination destination = new ActiveMQQueue(destName);</span><br><span class="line">        jmsMessagingTemplate.convertAndSend(destination, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="消费者"><a href="#消费者" class="headerlink" title="消费者"></a>消费者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Consumer &#123;</span><br><span class="line">    @JmsListener(destination = &quot;test.queue&quot;)</span><br><span class="line">    public void receiveMsg(String text) &#123;</span><br><span class="line">        System.out.println(&quot;&gt;&gt;&gt;&gt;-&gt;&gt;&gt;收到消息:&quot; + text);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="发布者"><a href="#发布者" class="headerlink" title="发布者"></a>发布者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Publisher &#123;</span><br><span class="line">    @Resource</span><br><span class="line">    private JmsMessagingTemplate jmsMessagingTemplate;</span><br><span class="line"></span><br><span class="line">    public void publish(String destName, String message) &#123;</span><br><span class="line">        Destination destination = new ActiveMQTopic(destName);</span><br><span class="line"></span><br><span class="line">        jmsMessagingTemplate.convertAndSend(destination, message);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="订阅者"><a href="#订阅者" class="headerlink" title="订阅者"></a>订阅者</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">@Service</span><br><span class="line">public class Subscriber &#123;</span><br><span class="line">    @JmsListener(destination = &quot;test.topic&quot;, containerFactory = &quot;myJmsContainerFactory&quot;)</span><br><span class="line">    public void subscribe(String text) &#123;</span><br><span class="line">        System.out.println(&quot;===&lt;&lt;&lt;&lt;收到订阅消息:&quot; + text);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    @Bean</span><br><span class="line">    JmsListenerContainerFactory myJmsContainerFactory(ConnectionFactory connectionFactory) &#123;</span><br><span class="line">        SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();</span><br><span class="line">        factory.setConnectionFactory(connectionFactory);</span><br><span class="line">        factory.setPubSubDomain(true);</span><br><span class="line">        return factory;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在pub/sub模式中，对消息的监听需要对containerFactory的配置</p>
 <blockquote>
-<p>代码参考<a href="https://github.com/spring-projects/spring-boot" target="_blank" rel="noopener">github地址</a></p>
+<p>代码参考<a href="https://github.com/wangweiye01/activemq" target="_blank" rel="noopener">github地址</a></p>
 </blockquote>
 
           
@@ -1454,7 +1591,7 @@
               
                 <a href="/blog/archives/">
               
-                  <span class="site-state-item-count">39</span>
+                  <span class="site-state-item-count">40</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

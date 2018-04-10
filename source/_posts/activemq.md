@@ -30,55 +30,72 @@ tar -zxvf apache-activemq-5.14.0-bin.tar.gz
 spring.activemq.broker-url=tcp://localhost:61616 
 spring.activemq.user=admin 
 spring.activemq.password=admin 
-spring.activemq.in-memory=true 
 spring.activemq.pool.enabled=false
 ```
 
 ## 生产者
 ```
-@Component 
-public class Producer implements CommandLineRunner { 
-    @Autowired 
-        private JmsMessagingTemplate jmsMessagingTemplate; 
-    @Autowired 
-        private Queue queue; 
-    @Override public void run(String... args) throws Exception { 
-        send("Sample message"); 
-        System.out.println("Message was sent to the Queue"); 
-    } 
+@Service
+public class Producer {
+    @Resource
+    private JmsMessagingTemplate jmsMessagingTemplate;
 
-    public void send(String msg) { 
-        this.jmsMessagingTemplate.convertAndSend(this.queue, msg); 
-    } 
+    public void sendMsg(String destName, String message) {
+        Destination destination = new ActiveMQQueue(destName);
+        jmsMessagingTemplate.convertAndSend(destination, message);
+    }
 }
+
 ```
 
 ## 消费者
 
 ```
-@Component
-public class Consumer { 
-    @JmsListener(destination = "sample.queue") 
-        public void receiveQueue(String text) { 
-            System.out.println(text); 
-        } 
+@Service
+public class Consumer {
+    @JmsListener(destination = "test.queue")
+    public void receiveMsg(String text) {
+        System.out.println(">>>>->>>收到消息:" + text);
+    }
 }
 ```
 
-## 程序入口
+## 发布者
 
 ```
-@SpringBootApplication 
-@EnableJms 
-public class SampleActiveMQApplication { 
-    @Bean 
-        public Queue queue() { 
-            return new ActiveMQQueue("sample.queue"); 
-        } 
-    public static void main(String[] args) { 
-        SpringApplication.run(SampleActiveMQApplication.class, args); 
-    } 
+@Service
+public class Publisher {
+    @Resource
+    private JmsMessagingTemplate jmsMessagingTemplate;
+
+    public void publish(String destName, String message) {
+        Destination destination = new ActiveMQTopic(destName);
+
+        jmsMessagingTemplate.convertAndSend(destination, message);
+    }
 }
 ```
 
-> 代码参考[github地址](https://github.com/spring-projects/spring-boot)
+## 订阅者
+
+```
+@Service
+public class Subscriber {
+    @JmsListener(destination = "test.topic", containerFactory = "myJmsContainerFactory")
+    public void subscribe(String text) {
+        System.out.println("===<<<<收到订阅消息:" + text);
+    }
+
+    @Bean
+    JmsListenerContainerFactory myJmsContainerFactory(ConnectionFactory connectionFactory) {
+        SimpleJmsListenerContainerFactory factory = new SimpleJmsListenerContainerFactory();
+        factory.setConnectionFactory(connectionFactory);
+        factory.setPubSubDomain(true);
+        return factory;
+    }
+}
+```
+
+在pub/sub模式中，对消息的监听需要对containerFactory的配置
+
+> 代码参考[github地址](https://github.com/wangweiye01/activemq)
