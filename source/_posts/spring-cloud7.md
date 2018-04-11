@@ -2,6 +2,7 @@
 title: 7.Spring Cloud构建微服务架构：Hystrix监控面板【Dalston版】
 date: 2018-04-11 09:16:17
 tags:
+categories: 微服务
 ---
 
 > 在上一篇《服务容错保护（hystrix断路器）》的介绍中，我们提到断路器是根据一段时间窗内的请求情况来判断并操作断路器的打开和关闭状态的。而这些请求情况的指标信息都是HystrixCommand和HystrixObservableCommand实例在执行过程中记录的重要度量信息，它们除了Hystrix断路器实现中使用之外，对于系统运维也有非常大的帮助。这些指标信息会以“滚动时间窗”与“桶”结合的方式进行汇总，并在内存中驻留一段时间，以供内部或外部进行查询使用，Hystrix Dashboard就是这些指标内容的消费者之一。

@@ -2,6 +2,7 @@
 title: 3.Spring Cloud：服务消费（Ribbon）【Dalston版】
 date: 2018-01-08 16:56:06
 top: 1
+categories: 微服务
 ---
 
 > 通过上一篇《Spring Cloud：服务消费（基础）》，我们已经学会如何通过LoadBalancerClient接口来获取某个服务的具体实例，并根据实例信息来发起服务接口消费请求。但是这样的做法需要我们手工的去编写服务选取、链接拼接等繁琐的工作，对于开发人员来说非常的不友好。所以，下来我们看看Spring Cloud中针对客户端负载均衡的工具包：Spring Cloud Ribbon

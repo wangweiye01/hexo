@@ -2,6 +2,7 @@
 title: 1.Spring Cloud：服务注册与发现
 date: 2017-12-14 14:39:51
 top: 1
+categories: 微服务
 ---
 # 微服务架构
 

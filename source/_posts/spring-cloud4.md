@@ -2,6 +2,7 @@
 title: 4.Spring Cloud：服务消费（Feign）【Dalston版】
 date: 2018-01-08 17:02:08
 top: 1
+categories: 微服务
 ---
 
 > 通过前两篇《Spring Cloud：服务消费（基础）》和《Spring Cloud：服务消费（Ribbon）》，我们已经学会了在Spring Cloud中基本的服务调用方式。本文我们将继续介绍Spring Cloud中的另外一个服务消费的工具：Spring Cloud Feign

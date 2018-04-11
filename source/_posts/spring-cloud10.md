@@ -2,6 +2,7 @@
 title: 10.Spring Cloud构建微服务架构：服务网关（过滤器）【Dalston版】 
 date: 2018-04-11 16:18:49
 tags:
+categories: 微服务
 ---
 
 在前两篇文章：服务网关（基础）、服务网关（路由配置）中，我们了解了Spring Cloud Zuul作为网关所具备的最基本功能：路由。本文我们将具体介绍一下Spring Cloud Zuul的另一项核心功能：过滤器。

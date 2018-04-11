@@ -2,6 +2,7 @@
 title: 9.Spring Cloud构建微服务架构：服务网关（路由配置）【Dalston版】
 date: 2018-04-11 14:37:58
 tags:
+categories: 微服务
 ---
 
 在上一篇《Spring Cloud构建微服务架构：服务网关（基础）》一文中，我们通过使用Spring Cloud Zuul构建了一个基础的API网关服务，同时也演示了Spring Cloud Zuul基于服务的自动路由功能。在本文中，我们将进一步详细地介绍关于Spring Cloud Zuul的路由功能，以帮助读者可以更好的理解和使用它，以完成更复杂的路由配置。

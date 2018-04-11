@@ -2,6 +2,7 @@
 title: 8.Spring Cloud构建微服务架构：服务网关（基础）【Dalston版】 
 date: 2018-04-11 14:11:45
 tags:
+categories: 微服务
 ---
 
 通过之前几篇Spring Cloud中几个核心组件的介绍，我们已经可以构建一个简略的（不够完善）微服务架构了。比如下图所示：
