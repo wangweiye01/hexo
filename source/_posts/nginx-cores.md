@@ -4,7 +4,7 @@ date: 2018-04-10 14:58:37
 tags:
 ---
 
-![toutu](http://www.wailian.work/images/2018/04/10/ce70875d0ef39b5ac4653e3e299ff909911adf5ea11fc-XBsjwX_fw658.jpg)
+![toutu](http://www.wailian.work/images/2018/04/11/502af7eae3feeb1e4b5c376c2f24e9b206182f1b187f73-7ntUXd_fw658.jpg)
 
 > 单服务器应用不用nginx代理时在Java中都是在Filter中实现的跨域设置，如何在请求到达应用服务器之前实现跨域的设置呢？使用nginx配置实现
 
