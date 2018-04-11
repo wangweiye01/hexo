@@ -5,6 +5,8 @@ tags:
 categories: 微服务
 ---
 
+![](http://www.wailian.work/images/2018/04/11/824a22acf6f0148cdd9cb70c66800ebaace0dcd92d5b7-QI248r_fw658.jpg)
+
 在前两篇文章：服务网关（基础）、服务网关（路由配置）中，我们了解了Spring Cloud Zuul作为网关所具备的最基本功能：路由。本文我们将具体介绍一下Spring Cloud Zuul的另一项核心功能：过滤器。
 
 # 过滤器的作用

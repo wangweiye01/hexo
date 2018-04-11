@@ -5,6 +5,8 @@ top: 1
 categories: 微服务
 ---
 
+![](http://www.wailian.work/images/2018/04/11/82e28073c162d7fdb959807c8037c57b201707ba130dfa-J5nIN0_fw658.jpg)
+
 > 通过前两篇《Spring Cloud：服务消费（基础）》和《Spring Cloud：服务消费（Ribbon）》，我们已经学会了在Spring Cloud中基本的服务调用方式。本文我们将继续介绍Spring Cloud中的另外一个服务消费的工具：Spring Cloud Feign
 
 # Spring Cloud Feign
