@@ -2,7 +2,7 @@
 title: 扫描二维码（登录，支付）后立即通知
 date: 2018-03-05 10:48:42
 tags:
-top: true
+top: 100
 ---
 
 ![](http://www.wailian.work/images/2018/03/05/1211.jpg)

@@ -2,6 +2,7 @@
 title: nginx配置CORS实现跨域
 date: 2018-04-10 14:58:37
 tags:
+top: 99
 ---
 
 ![toutu](http://www.wailian.work/images/2018/04/11/502af7eae3feeb1e4b5c376c2f24e9b206182f1b187f73-7ntUXd_fw658.jpg)
