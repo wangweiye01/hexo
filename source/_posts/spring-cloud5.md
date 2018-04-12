@@ -175,3 +175,11 @@ server:
 }
 ```
 另外，我们也可以修改config-client的profile为dev来观察加载配置的变化。
+
+# 配置刷新
+
+以上配置有个问题：只有在应用启动时会读取到git的内容， 之后只要应用不重启，git中文件的修改，应用无法感知， 即使重启Config Server也不行，此时需要让客户端(config-client)支持/refresh方法
+
+在程序入口类上面加载`@RefreshScope`注解，在客户端执行`/refresh`的时候就会更新此类下面的变量值
+
+以上每当git中配置文件被修改，仍然需要我们主动调用/refresh方法（手动调用或者写代码调用）， 有没有办法让git中配置有改动就自动触发客户端的refresh机制呢？ 答案是：有。可以通过git提供的githook来监听push命令，如果项目中使用了Jenkins等持续集成工具（也是利用githook来监听的），就可以在监听事件处理中直接调用/refresh方法就可以了。
