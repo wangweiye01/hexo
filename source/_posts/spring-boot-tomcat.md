@@ -17,7 +17,11 @@ top: 10
 
 参考 https://github.com/spring-projects/spring-boot/issues/5009
 
-意思是tomcat的临时目录会被 系统目录 tmpwatch 删除掉，甚至可能删除掉 class 文件。
+`tmpwatch` – removes  files  which haven’t been accessed for a period of time
+
+如上所言，删除指定的目录中一段时间未访问的文件。一般对于/tmp下的文件或日志文件
+
+意思是tomcat的临时目录会被`tmpwatch`删除掉，甚至可能删除掉`class`文件，导致错误的发生
 
 # 解决方法
 
