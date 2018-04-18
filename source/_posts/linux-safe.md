@@ -3,6 +3,9 @@ title: Linux用户权限
 date: 2017-12-20 16:10:19
 tags:
 ---
+
+![](http://www.wailian.work/images/2018/04/18/121.jpg)
+
 CentOS默认允许任何用户通过ssh登入，但是在企业应用中为了保证服务器的安全性一般不允许用户直接通过root用户登录，而是通过普通用户登录然后切换到root或者使用sudo权限来执行root用户命令
 
 # 创建用户
