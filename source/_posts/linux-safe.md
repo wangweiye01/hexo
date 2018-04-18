@@ -45,3 +45,13 @@ usermod -G wheel wangweiye
 ## 重启ssh服务
 
 `systemctl restart sshd.service`重启ssh服务
+
+# 给用户分配sudo权限
+
+如果只想给用户sudo权限而不能切换root用户登录(不加入wheel组)
+
+```
+vim /etc/sudoers
+```
+
+![](http://www.wailian.work/images/2018/04/18/121.png)
