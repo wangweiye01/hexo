@@ -3,6 +3,7 @@ title: 设计模式-观察者模式
 date: 2018-06-08 15:27:38
 tags:
 top: 111
+categories: 设计模式
 ---
 
 # 定义
