@@ -32,3 +32,40 @@ java -cp /Users/wangweiye/.m2/repository/org/jasypt/jasypt/1.9.2/jasypt-1.9.2.ja
 
 - input为需要加密的字符串;
 - password为配置文件中设置的加密密钥;
+
+## Java项目内使用
+
+### 加密
+
+```
+public void encrypt() {
+    // 创建加密器
+    StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+    // 配置
+    EnvironmentStringPBEConfig config = new EnvironmentStringPBEConfig();
+    config.setAlgorithm("PBEWithMD5AndDES");// 加密算法
+    config.setPassword("xxxx");// 密码
+    encryptor.setConfig(config);
+
+    String plaintext = "root"; //明文
+    String ciphertext = encryptor.encrypt(plaintext); // 加密
+    System.out.println(plaintext + " : " + ciphertext);// 运行结果：root : root : zLdyNB+Dj3iw+J+TXZiv5g==
+}
+```
+
+### 解密
+
+```
+public void decrypt() {
+    StandardPBEStringEncryptor encryptor = new StandardPBEStringEncryptor();
+    EnvironmentStringPBEConfig config = new EnvironmentStringPBEConfig();
+    config.setAlgorithm("PBEWithMD5AndDES");
+    config.setPassword("xxxx");
+    encryptor.setConfig(config);
+    String ciphertext = "zLdyNB+Dj3iw+J+TXZiv5g==";// 密文
+
+    //解密
+    String plaintext = encryptor.decrypt(ciphertext); // 解密
+    assertThat(plaintext).isEqualTo("root");
+}
+```
