@@ -202,3 +202,5 @@ testcase2
 
 </html>
 ```
+
+[完整代码](https://github.com/wangweiye01/throttle)
