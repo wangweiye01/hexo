@@ -23,18 +23,19 @@ tags:
 
 ## Redis命令介绍
 
-1. ```SETNX key val``` 当且仅当key不存在时，set一个key为val的字符串，返回1；若key存在，则什么都不做，返回0
-2. ```expire key timeout``` 为key设置一个超时时间，单位为second，超过这个时间锁会自动释放，避免死锁
-3. ```delete key``` 删除key
+- `SETNX key val` 当且仅当key不存在时，set一个key为val的字符串，返回1；若key存在，则什么都不做，返回0
+- `expire key timeout` 为key设置一个超时时间，单位为second，超过这个时间锁会自动释放，避免死锁
+- `delete key` 删除key
 
 ## 实现思想
+
 1. 获取锁的时候，使用setnx加锁，并使用expire命令为锁添加一个超时时间，超过该时间则自动释放锁，锁的value值为一个随机生成的UUID（用来标识一次网络请求）
 2. 获取锁的时候还设置一个超时时间，若超过这个时间则放弃锁
 3. 释放锁的时候，通过UUID判断是不是该锁，若是，则执行delete进行释放
 
 ## Redis操作工具类
 
-```
+``` java
 import redis.clients.jedis.Jedis;
 
 import java.util.Collections;
@@ -90,7 +91,7 @@ public class RedisTool {
 
 ## 需要加锁的业务逻辑实现
 
-```
+``` java
 import cc.wangweiye.distributelock.DistributedLock;
 import redis.clients.jedis.Jedis;
 import redis.clients.jedis.JedisPool;
@@ -140,7 +141,7 @@ public class Service2 {
 
 ## 线程执行逻辑
 
-```
+``` java
 public class ThreadB extends Thread {
     private Service2 service2;
 
@@ -157,7 +158,7 @@ public class ThreadB extends Thread {
 
 ## 测试代码
 
-```
+``` java
 public class Test2 {
     public static void main(String[] args) {
         Service2 service2 = new Service2();
