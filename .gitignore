@@ -1,5 +1,4 @@
 .DS_Store
 public/
-db.json
 .deploy_git
 dump.rdb
