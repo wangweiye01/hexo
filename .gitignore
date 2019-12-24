@@ -2,3 +2,5 @@
 public/
 .deploy_git
 dump.rdb
+._hexo.code-workspace
+hexo.code-workspace
