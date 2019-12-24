@@ -1,7 +1,7 @@
 ---
 title: axios使用Promise刷新token
 date: 2019-12-24 09:18:50
-tags: 前端,vue
+tags: 前端
 ---
 ![](http://s1.wailian.download/2019/12/24/snow-ball-4708528_1280.jpg)
 
