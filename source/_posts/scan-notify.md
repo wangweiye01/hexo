@@ -2,7 +2,7 @@
 title: 扫描二维码（登录，支付）后立即通知
 date: 2018-03-05 10:48:42
 tags:
-top: 100
+top: 1000
 ---
 
 ![](http://www.wailian.work/images/2018/03/05/1211.jpg)
@@ -172,6 +172,57 @@ class ScanCounter implements Runnable {
 ```
 
 ![verify](http://www.wailian.work/images/2018/03/05/code4c40c.png)
+
+# 定时清理uuid
+
+为防止cacheMap不断增加的问题，需要在静态代码块中开启线程定时清理
+
+```
+public class PoolCache {
+    //缓存超时时间 80秒
+    private static Long timeOutSecond = 80L;
+
+    //每1分钟清理一次缓存
+    private static Long cleanIntervalSecond = 60L;
+
+    public static Map<String, ScanPool> cacheMap = new ConcurrentHashMap<String, ScanPool>();
+
+    static {
+        new Thread(new Runnable() {
+
+            @Override
+            public void run() {
+                while (true) {
+                    try {
+                        Thread.sleep(cleanIntervalSecond * 1000);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    clean();
+                }
+            }
+
+            public void clean() {
+                System.out.println("缓存清理...");
+
+                if (cacheMap.keySet().size() > 0) {
+                    Iterator<String> iterator = cacheMap.keySet().iterator();
+                    while (iterator.hasNext()) {
+                        String key = iterator.next();
+                        ScanPool pool = cacheMap.get(key);
+                        if (System.currentTimeMillis() - pool.getCreateTime() > timeOutSecond * 1000) {
+                            cacheMap.remove(key);
+                            // 这一行很关键！用于当清理完成，前端请求还在pending时，立即返回结果
+                            pool.notifyPool();
+                        }
+                    }
+                }
+            }
+        }).start();
+    }
+
+}
+```
 
 
 # 扫码
