@@ -88,7 +88,7 @@ public class Person {
         this.age = age;
     }
 
-    public String getName() {
+    private String getName() {
         return name;
     }
 
