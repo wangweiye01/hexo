@@ -73,6 +73,12 @@ Java反射机制是在运行状态中，对于任意一个类，都能够知道�
 # 示例
 
 ```
+package com.wang;
+
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+
 public class Person {
     private final static String classString = "com.wang.Person";
 
@@ -88,7 +94,7 @@ public class Person {
         this.age = age;
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
@@ -147,6 +153,8 @@ public class Person {
     }
 
     public static void main(String[] args) {
+        reflectNewInstance();
+
         reflectPrivateConstructor();
 
         reflectPrivateField();
