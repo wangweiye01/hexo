@@ -128,12 +128,12 @@ public class Reader implements Observer {
 
     // 当关注的作者发布新小说时，会通知读者去看
     @Override
-        public void update(Observable o, Object arg) {
-            if (o instanceof Writer) {
-                Writer writer = (Writer) o;
-                System.out.println(name + "知道" + writer.getName() + "发布了新书《" + writer.getLastNovel() + "》非要去看");
-            }
+    public void update(Observable o, Object arg) {
+        if (o instanceof Writer) {
+            Writer writer = (Writer) o;
+            System.out.println(name + "知道" + writer.getName() + "发布了新书《" + writer.getLastNovel() + "》非要去看");
         }
+    }
 
     //读者可以关注某一位作者，关注则代表把自己加到作者的观察者列表里
     public void subscribe(String writerName) {
