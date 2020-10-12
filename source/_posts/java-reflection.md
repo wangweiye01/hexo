@@ -74,7 +74,7 @@ Java反射机制是在运行状态中，对于任意一个类，都能够知道�
 
 ```
 public class Person {
-    private final static String classString = "com.wang.threadlocal.Person";
+    private final static String classString = "com.wang.Person";
 
     private String name;
 
