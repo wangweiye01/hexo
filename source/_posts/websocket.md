@@ -4,6 +4,8 @@ date: 2020-02-17 09:14:19
 tags:
 ---
 
+![marigold-5582848_1280.jpg](https://p.130014.xyz/2020/10/14/marigold-5582848_1280.jpg)
+
 ## 什么是websocket
 
 Websocket是一种在单个TCP连接上进行[全双工](https://baike.baidu.com/item/%E5%85%A8%E5%8F%8C%E5%B7%A5/310007?fr=aladdin)通信的协议

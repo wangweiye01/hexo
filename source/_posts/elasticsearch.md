@@ -4,6 +4,8 @@ date: 2020-03-21 16:02:02
 tags:
 ---
 
+![tree-5491570_1280.jpg](https://p.130014.xyz/2020/10/14/tree-5491570_1280.jpg)
+
 ## 什么是Elasticsearch
 
 Elasticsearch是一个开源的，分布式，高可用的数据库，是目前[全文搜索](https://baike.baidu.com/item/%E5%85%A8%E6%96%87%E6%90%9C%E7%B4%A2%E5%BC%95%E6%93%8E)的首选。它可以快速的存储、搜索、分析海量数据。
