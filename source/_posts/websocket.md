@@ -1,196 +1,271 @@
 ---
-title: Spring Boot实现WebSocket消息推送
-date: 2018-03-01 17:05:06
+title: websocket简介与实战
+date: 2020-02-17 09:14:19
 tags:
 ---
 
-![pic](http://www.wailian.work/images/2018/03/02/3b41bb4144a7478ef7d1937c3a0ec56975e163f61a9ba-n8Syo1_fw658.jpg)
+## 什么是websocket
 
-# 什么是WebSocket
+Websocket是一种在单个TCP连接上进行[全双工](https://baike.baidu.com/item/%E5%85%A8%E5%8F%8C%E5%B7%A5/310007?fr=aladdin)通信的协议
 
-WebSocket协议是基于TCP的一种新的网络协议。它实现了浏览器与服务器全双工(full-duplex)通信——允许服务器主动发送信息给客户端。
+## 为什么需要websocket
 
-# 配置
+HTTP协议有一个缺陷：通信只能由客户端发起
 
-```
+这种单向请求的特点导致如果服务端出现连续状态的变化，客户端要想获知就比较麻烦，我们只能使用"轮询"模式
+
+轮询的效率低，非常浪费资源（因为必须不停连接，或者 HTTP 连接始终打开）。因此，工程师们一直在思考，有没有更好的方法。WebSocket 就是这样发明的。
+
+![bg2017051502.png](http://s1.wailian.download/2020/02/17/bg2017051502.png)
+
+## 特点
+
+1. 建立在TCP协议之上，服务端的实现比较容易
+2. 与HTTP协议有良好的兼容。默认端口也是80和443，并且握手阶段采用HTTP协议，因此握手时不容易屏蔽，能通过各种HTTP代理服务器
+3. 数据格式比较轻，新能开销小，通信高效
+4. 可以发送文本，也可以发送二进制数据
+5. 没有同源限制，客户端可以与任意服务器通信
+6. 协议标识符是`ws`(如果加密，则为`wss`)，服务器网址就是URL
+
+## 实战
+
+### STOMP协议
+
+STOMP即Simple Text Orientated Messaging Protocol，简单文本定向消息协议，它提供了一个可互操作的连接格式，允许STOMP客户端与任意STOMP消息代理（Broker）进行交互
+
+### 后端
+
+``` java
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig extends AbstractWebSocketMessageBrokerConfigurer {
+    @Override
+    public void configureMessageBroker(MessageBrokerRegistry config) {
+        // 表示客户端订阅地址的前缀信息，也就是客户端接收服务端消息的地址的前缀信息
+        config.enableSimpleBroker("/topic", "/user");
 
-	@Override
-	public void configureMessageBroker(MessageBrokerRegistry config) {
-		config.enableSimpleBroker("/topic");
-		config.setApplicationDestinationPrefixes("/app");
-	}
+        //指服务端接收地址的前缀，意思就是说客户端给服务端发消息的地址的前缀
+        config.setApplicationDestinationPrefixes("/app");
+        config.setUserDestinationPrefix("/user/");
+    }
 
-	@Override
-	public void registerStompEndpoints(StompEndpointRegistry registry) {
-		registry.addEndpoint("/my-websocket").withSockJS();
-	}
+    // 注册STOMP端点
+    @Override
+    public void registerStompEndpoints(StompEndpointRegistry registry) {
+        registry.addEndpoint("/my-websocket").setAllowedOrigins("*").withSockJS();
+    }
 }
 ```
 
-这里配置了以"/app"开头的websocket请求url和名为"my-websocket"的endpoint
-
-1. @EnableWebSocketMessageBroker注解表示开启使用STOMP协议来传输基于代理的消息
-2. registerStompEndpoints方法表示注册STOMP协议的节点，并指定映射的URL
-3. `registry.addEndpoint("/my-websocket").withSockJS()`这一行代码用来注册STOMP协议节点，同时指定使用SockJS协议。
-4. configureMessageBroker方法用来配置消息代理，由于我们是实现推送功能，这里的消息代理是/topic
-
-# 推送消息类
-
-```
-public class SocketMessage {
-
-	public String message;
-
-	public String date;
-
-}
-```
-
-
-# 控制器
-
-```
+```java
 @Controller
 @EnableScheduling
 @SpringBootApplication
 public class App {
 
-	public static void main(String[] args) {
-		SpringApplication.run(App.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(App.class, args);
+    }
 
-	@Autowired
-	private SimpMessagingTemplate messagingTemplate;
+    @Autowired
+    private SimpMessagingTemplate messagingTemplate;
 
-	@GetMapping("/")
-	public String index() {
-		return "index";
-	}
+    @GetMapping("/")
+    public String index() {
+        return "index";
+    }
 
-	@MessageMapping("/send")
-	@SendTo("/topic/send")
-	public SocketMessage send(SocketMessage message) throws Exception {
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		message.date = df.format(new Date());
-		return message;
-	}
+    @Scheduled(fixedRate = 1000)
+    public Object time() throws Exception {
+        // 发现消息
+        DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        messagingTemplate.convertAndSend("/topic/time", df.format(new Date()));
+        return "time";
+    }
 
-	@Scheduled(fixedRate = 1000)
-	@SendTo("/topic/callback")
-	public Object callback() throws Exception {
-		// 发现消息
-		DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		messagingTemplate.convertAndSend("/topic/callback", df.format(new Date()));
-		return "callback";
-	}
+    @Scheduled(fixedRate = 2000)
+    @SendToUser("/greetings")
+    public String greeting2() {
+        messagingTemplate.convertAndSendToUser("2", "/greetings", "欢迎您，用户: 2");
+        return "OK";
+    }
+
+    @Scheduled(fixedRate = 2000)
+    @SendToUser("/greetings")
+    public String greeting1() {
+        messagingTemplate.convertAndSendToUser("1", "/greetings", "欢迎您，用户: 1");
+        return "OK";
+    }
+
+    @Scheduled(fixedRate = 9000)
+    public Object notification() {
+        // 发送消息
+        messagingTemplate.convertAndSend("/topic/notification", "hello world!");
+        return "ok";
+    }
 }
 ```
 
-`@MessageMapping`注解和`@RequestMapping`类似，用来发送消息到特定路径
+### 前端
 
-`@SendTo`注解表示当服务器有消息需要推送的时候，会对订阅了`@SendTo`中路径的客户端发送消息
+demo1和demo2都是订阅了两个topic。1个是获得服务器推送的时间，另一个是获得定向推送的消息(demo1向userId=1的用户推送，demo2向userId=2的用户推送)
 
-# 前端脚本
+```javascript
+<template>
+  <div id="app">
+    <div>
+      <label>WebSocket连接状态:</label>
+      <button type="button" :disabled="connected" @click="connect()">连接</button>
+      <button type="button" @click="disconnect()" :disabled="!connected">断开</button>
+    </div>
 
-我们这个案例需要三个js脚本文件，分别是STOMP协议的客户端脚本stomp.js、SockJS的客户端脚本sock.js以及jQuery
+    <div v-if="connected">
+      <label>当前服务器时间：{{ time }}</label>
+      <br />消息列表：
+      <br />
+      <hr />
+      <table>
+        <thead>
+          <tr>
+            <th>内容</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="row in lala">
+            <td>{{row}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</template>
 
-# 演示页面
+<script>
+// @ is an alias to /src
+export default {
+  name: "Demo1",
+  data() {
+    return {
+      stompClient: "",
+      // 连接状态
+      connected: false,
+      lala: [],
+      time: ""
+    };
+  },
+  methods: {
+    connect() {
+      const socket = new SockJS("http://localhost:8080/my-websocket");
+      this.stompClient = Stomp.over(socket);
+      const that = this
+      this.stompClient.connect({}, function(frame) {
+        // 注册发送消息(demo1和demo2区别在于此)
+        that.stompClient.subscribe("/user/1/greetings", function(msg) {
+          that.lala.push(msg);
+        });
+        // 注册推送时间回调
+        that.stompClient.subscribe("/topic/time", function(response) {
+          that.time = response.body;
+        });
 
-```
-<!DOCTYPE html>
-<html>
-<head>
-<title>websocket</title>
-<script src="//cdn.bootcss.com/angular.js/1.5.6/angular.min.js"></script>
-<script src="https://cdn.bootcss.com/sockjs-client/1.1.4/sockjs.min.js"></script>
-<script src="https://cdn.bootcss.com/stomp.js/2.3.3/stomp.min.js"></script>
-<script type="text/javascript">
+        that.connected = true;
+      });
+    },
+    disconnect() {
+      if (this.stompClient != null) {
+        this.stompClient.disconnect();
+      }
 
-	var stompClient = null;
-
-	var app = angular.module('app', []);
-	app.controller('MainController', function($rootScope, $scope, $http) {
-
-		$scope.data = {
-			//连接状态
-			connected : false,
-			//消息
-			message : '',
-			rows : []
-		};
-
-		//连接
-		$scope.connect = function() {
-			var socket = new SockJS('/my-websocket');
-			stompClient = Stomp.over(socket);
-			stompClient.connect({}, function(frame) {
-				// 注册发送消息
-				stompClient.subscribe('/topic/send', function(msg) {
-					$scope.data.rows.push(JSON.parse(msg.body));
-					$scope.data.connected = true;
-					$scope.$apply();
-				});
-				// 注册推送时间回调
-				stompClient.subscribe('/topic/callback', function(r) {
-					$scope.data.time = '当前服务器时间：' + r.body;
-					$scope.data.connected = true;
-					$scope.$apply();
-				});
-
-				$scope.data.connected = true;
-				$scope.$apply();
-			});
-		};
-
-		$scope.disconnect = function() {
-			if (stompClient != null) {
-				stompClient.disconnect();
-			}
-			$scope.data.connected = false;
-		}
-
-		$scope.send = function() {
-			stompClient.send("/app/send", {}, JSON.stringify({
-				'message' : $scope.data.message
-			}));
-		}
-	});
+      this.connected = false;
+      this.lala = [];
+    }
+  }
+};
 </script>
-</head>
-<body ng-app="app" ng-controller="MainController">
-	<label>WebSocket连接状态:</label>
-	<button type="button" ng-disabled="data.connected" ng-click="connect()">连接</button>
-	<button type="button" ng-click="disconnect()"
-		ng-disabled="!data.connected">断开</button>
-	<br />
-	<br />
-	<div ng-show="data.connected">
-		<label>{{data.time}}</label> <br /> <br /> <input type="text"
-			ng-model="data.message" placeholder="请输入内容..." />
-		<button ng-click="send()" type="button">发送</button>
-		<br /> <br /> 消息列表： <br />
-		<table>
-			<thead>
-				<tr>
-					<th>内容</th>
-					<th>时间</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr ng-repeat="row in data.rows">
-					<td>{{row.message}}</td>
-					<td>{{row.date}}</td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-</body>
-</html>
 ```
-![演示图](http://www.wailian.work/images/2018/03/02/WX20180302-094543.png)
 
+demo3是订阅后端topic，每隔一段时间推送消息给浏览器，随后浏览器显示[Notification](https://developer.mozilla.org/zh-CN/docs/Web/API/notification)
 
-[代码地址](https://github.com/wangweiye01/websocket)
+```javascript
+<template>
+  <div id="app">
+    <div>服务器推送，客户端显示Notification</div>
+    <div>WebSocket连接状态:{{ connected }}</div>
+    <div>
+      <button type="button" :disabled="connected" @click="connect()">连接</button>
+      <button type="button" @click="disconnect()" :disabled="!connected">断开</button>
+    </div>
+  </div>
+</template>
+
+<script>
+// @ is an alias to /src
+
+export default {
+  name: "Demo3",
+  data() {
+    return {
+      stompClient: "",
+      // 连接状态
+      connected: false
+    };
+  },
+  methods: {
+    connect() {
+      var socket = new SockJS("http://localhost:8080/my-websocket");
+      this.stompClient = Stomp.over(socket);
+      let that = this
+      this.stompClient.connect({}, function(frame) {
+        // 注册推送时间回调
+        that.stompClient.subscribe("/topic/notification", function(response) {
+          that.connected = true;
+          // 弹窗
+          if (window.Notification) {
+            var popNotice = function() {
+              if (Notification.permission == "granted") {
+                var notification = new Notification("Hi，你好", {
+                  body: response.body,
+                  icon: "https://pcoss.guan18.com/%E6%A9%98%E8%92%9C.jpeg"
+                });
+
+                notification.onclick = function() {
+                  notification.close();
+                };
+              }
+            };
+
+            if (Notification.permission == "granted") {
+              // 已经授权接受通知
+              popNotice();
+            } else if (Notification.permission != "denied") {
+              // 未拒绝接受通知，提示用户授权
+              Notification.requestPermission(function(permission) {
+                popNotice();
+              });
+            }
+          } else {
+            alert("浏览器不支持Notification");
+          }
+        });
+
+        this.connected = true;
+      });
+    },
+    disconnect() {
+      if (this.stompClient != null) {
+        this.stompClient.disconnect();
+      }
+
+      this.connected = false;
+    }
+  }
+};
+</script>
+```
+
+demo3演示
+![Kapture-2020-02-20-at-14.13.37.gif](http://s1.wailian.download/2020/02/20/Kapture-2020-02-20-at-14.13.37.gif)
+
+[前端源码](https://gitee.com/gttx/websocket)
+
+[后端源码](https://gitee.com/gttx/websocket-api)
