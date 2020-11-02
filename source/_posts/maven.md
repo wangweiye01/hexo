@@ -1,5 +1,5 @@
 ---
-title: maven构建Spring Boot多模块项目以及打包方法
+title: Spring Boot多模块项目创建以及需要注意的问题
 date: 2018-03-26 15:06:22
 tags:
 ---
@@ -9,62 +9,45 @@ tags:
 
 # 构建项目
 
-## 创建空的maven主项目
+- 可以使用`Spring Initializr`先创建一个普通的spring boot项目，然后删除`src`目录以及其他无用文件
 
-![create](http://www.wailian.work/images/2018/03/26/1.png)
+- 然后修改主项目的pom文件，在其中添加`<packaging>pom</packaging>`
 
-![mvn](http://www.wailian.work/images/2018/03/26/2.png)
+![WX20201102-171326.png](https://p.130014.xyz/2020/11/02/WX20201102-171326.png)
 
-## 删除src目录
+- 接着添加`<dependencyManagement>`用于管理项目中所有依赖的版本信息。当子moudle中需要该依赖时，不需要填写版本号，以此来保证项目中的版本一致性
 
-![src](http://www.wailian.work/images/2018/03/26/3.png)
+[![WX20201102-171601.png](https://p.130014.xyz/2020/11/02/WX20201102-171601.png)](http://www.wailian.work/image/QKITi4)
 
-## 修改pom文件
+## 创建Spring Boot子模块 
 
-添加`<packaging>pom</packaging>`
+使用`Spring Initializr`创建普通的spring boot模块
 
-![](http://www.wailian.work/images/2018/03/26/4.png)
+- 将`pom`中的`parent`信息改为主项目信息；并修改`<packaging>`为`jar`
 
-# 创建Spring Boot项目模块 
+[![WX20201102-172112.png](https://p.130014.xyz/2020/11/02/WX20201102-172112.png)](http://www.wailian.work/image/QKIrAk)
 
-在主项目上点击右键，选择New-Module
+- 注意：如果该子模块仍需要被其他模块依赖，则修改打包插件如图，增加`<configuration>`的配置，使该模块默认打包为`普通jar`而非`可执行jar`打包后生成的两个jar包如图所示
 
-![](http://www.wailian.work/images/2018/03/26/5.png)
+![WX20201102-172559.png](https://p.130014.xyz/2020/11/02/WX20201102-172559.png)
 
-选择Spring Initializr
 
-![](http://www.wailian.work/images/2018/03/26/6.png)
+## 如何做到多环境配置文件合理覆盖
 
-填写基本信息之后完成模块项目创建
+在子项目中有默认的配置文件，其他依赖于该子项目的项目可以选择性覆盖配置文件中的信息
 
-![](http://www.wailian.work/images/2018/03/26/7.png)
+- 在子项目中创建默认的配置文件
 
-采用相同方式再创建一个模块
+![WX20201102-173211.png](https://p.130014.xyz/2020/11/02/WX20201102-173211.png)
 
-![](http://www.wailian.work/images/2018/03/26/8.png)
+[![WX20201102-173338.png](https://p.130014.xyz/2020/11/02/WX20201102-173338.png)](http://www.wailian.work/image/QKI2jI)
 
-# 修改主项目pom文件
+- 在主项目中使用`spring.profiles.include`引入子项目中的配置文件，来覆盖其中的配置信息（具有相同的配置时后面的覆盖前面的 service覆盖common，dev覆盖service）
 
-将两个子模块pom中的spring boot父依赖剪切到主项目中的pom文件中
+![WX20201102-173609.png](https://p.130014.xyz/2020/11/02/WX20201102-173609.png)
 
-![](http://www.wailian.work/images/2018/03/26/9.png)
+# 测试
 
-在两个子模块pom中添加对父项目的依赖
+在根目录下执行`mvn clean package`即可打包所有的子项目
 
-![](http://www.wailian.work/images/2018/03/26/10.png)
-
-在主项目pom中添加所有的子模块
-
-![](http://www.wailian.work/images/2018/03/26/11.png)
-
-# 测试依赖
-
-utils中添加方法，并在api模块中引入依赖，即可使用
-
-# 打包
-
-注意：多模块项目仅仅需要在启动类所在的模块添加打包插件即可！！不要在父类添加打包插件
-
-删除启动类以外模块中pom文件的build插件,然后在主目录下执行`mvn clean package`即可
-
-[代码地址](https://github.com/wangweiye01/maven)
+[代码地址](https://gitee.com/doublew/sha)
